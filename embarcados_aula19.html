@@ -252,6 +252,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Unir os subsistemas testados em um único código</span>
           </div>
           <div class="ex-desc">Unir os códigos testados isoladamente na semana anterior, resolvendo conflitos de pinos, bibliotecas e timing entre sensores e atuadores.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Reúnam os códigos já testados isoladamente (motores, sensores, display) em um único arquivo.</li><li>Resolvam conflitos de pinos, renomeando variáveis/pinos quando necessário.</li><li>Unifiquem os delays: evitem vários delay() longos que travem o sistema; prefiram lógica com millis().</li><li>Carreguem o código completo e testem cada função dentro do sistema integrado, isolando erros comentando trechos se necessário.</li></ol>
+          </details>
         </div>
   </div>
 

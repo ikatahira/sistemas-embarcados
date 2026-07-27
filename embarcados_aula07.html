@@ -246,6 +246,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Programar padrões de pisca-pisca com delays variados</span>
           </div>
           <div class="ex-desc">Criar um sketch com padrão SOS em código Morse usando apenas o LED embutido do Arduino (pino 13). Utilizar delay() para controlar os intervalos.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Defina os tempos do código Morse: ponto = 200ms aceso, traço = 600ms aceso, pausa entre sinais = 200ms.</li><li>Escreva funções piscaPonto() e piscaTraco() usando digitalWrite + delay.</li><li>No loop(), chame a sequência: 3 pontos (S), 3 traços (O), 3 pontos (S), com pausa maior entre letras.</li><li>Carregue o código e confira se o padrão S-O-S fica reconhecível.</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#00ff88">
           <div class="ex-num">02</div>
@@ -256,6 +261,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Controlar LED através de entrada digital</span>
           </div>
           <div class="ex-desc">Implementar lógica de controle: LED acende ao pressionar botão e apaga ao soltar. Adicionar saída serial com Serial.println() indicando o estado atual.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Monte o botão com resistor pull-down de 10k ohm no pino 2, como na aula anterior.</li><li>No setup(), adicione Serial.begin(9600);</li><li>No loop(): leia o botão, acenda/apague o LED conforme o estado, e envie Serial.println(estado);</li><li>Abra o Serial Monitor (9600 baud) e observe os valores mudando ao pressionar o botão.</li></ol>
+          </details>
         </div>
   </div>
 

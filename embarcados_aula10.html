@@ -246,6 +246,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Exibir texto e valores de sensor em display de cristal líquido</span>
           </div>
           <div class="ex-desc">Montar o display LCD 16x2 usando módulo I²C (apenas 4 fios: VCC, GND, SDA, SCL). Exibir uma mensagem personalizada e, em seguida, o valor de temperatura lido pelo DHT11.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte o módulo LCD I2C: VCC-5V, GND-GND, SDA-A4, SCL-A5 (Arduino Uno).</li><li>Instale a biblioteca 'LiquidCrystal I2C' pelo Gerenciador de Bibliotecas.</li><li>Descubra o endereço I2C do display (geralmente 0x27 ou 0x3F) com um sketch 'I2C Scanner', se necessário.</li><li>No código: LiquidCrystal_I2C lcd(0x27,16,2); lcd.init(); lcd.backlight(); lcd.print("Ola, Embarcados!");</li><li>Na segunda linha, exiba a temperatura: lcd.setCursor(0,1); lcd.print(dht.readTemperature());</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#ff3b5c">
           <div class="ex-num">02</div>
@@ -256,6 +261,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Criar alarme com buzzer e LED baseado em sensor</span>
           </div>
           <div class="ex-desc">Combinar sensor ultrassônico + buzzer + 2 LEDs: verde (seguro, >30 cm), vermelho + buzzer (perigo, <10 cm). Simular um sensor de ré de carro.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Combine o HC-SR04 já conectado com um buzzer no pino 8 e 2 LEDs (verde no 6, vermelho no 7).</li><li>No loop, calcule a distância como no exercício do medidor.</li><li>Se distancia > 30: acenda o LED verde, apague o vermelho e o buzzer.</li><li>Se distancia < 10: acenda o LED vermelho, ative o buzzer com tone(8,1000) e apague o verde.</li><li>Teste aproximando e afastando a mão do sensor.</li></ol>
+          </details>
         </div>
   </div>
 

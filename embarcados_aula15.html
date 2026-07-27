@@ -253,6 +253,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Montar a base física e testar movimentos</span>
           </div>
           <div class="ex-desc">Montar um chassi com dois motores CC acionados por ponte H dupla. Testar os movimentos básicos: frente, ré e giro sobre o próprio eixo.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Fixe os 2 motores CC no chassi (esquerdo e direito) e instale a roda livre/caster.</li><li>Conecte os motores à ponte H dupla (ex: L298N).</li><li>Ligue IN1-IN4 da ponte H a 4 pinos digitais do Arduino; alimente com bateria externa.</li><li>Código de teste: para frente, os 2 motores no mesmo sentido; para girar, sentidos opostos.</li><li>Teste no chão: frente, ré, giro à esquerda, giro à direita.</li></ol>
+          </details>
         </div>
   </div>
 

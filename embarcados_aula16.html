@@ -253,6 +253,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Programar a lógica de um seguidor de linha</span>
           </div>
           <div class="ex-desc">Com dois sensores infravermelhos reflexivos, programar a lógica condicional que faz o robô seguir uma linha preta desenhada no chão.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Fixe 2 sensores IR reflexivos na frente do robô, próximos ao chão, apontando para baixo.</li><li>Conecte as saídas digitais dos sensores a 2 pinos do Arduino (ex: 6 e 7).</li><li>Calibre testando sobre a linha preta e fora dela, anotando o valor HIGH/LOW em cada caso.</li><li>Código: se esquerdo detecta e direito não, gire à esquerda; se direito detecta e esquerdo não, gire à direita; se ambos ou nenhum, siga em frente.</li><li>Teste sobre uma pista com curvas suaves.</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#00e5ff">
           <div class="ex-num">02</div>
@@ -263,6 +268,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Programar desvio automático de obstáculos</span>
           </div>
           <div class="ex-desc">Com o sensor ultrassônico HC-SR04 acoplado à frente do robô, programar a lógica que altera a direção dos motores ao detectar um obstáculo próximo.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Fixe o sensor HC-SR04 na frente do robô, na altura de possíveis obstáculos.</li><li>Conecte TRIG/ECHO a 2 pinos livres do Arduino.</li><li>Código: calcule a distância continuamente; se menor que 20cm, pare, gire para um lado por um tempo fixo e siga em frente novamente.</li><li>Teste colocando obstáculos no caminho do robô.</li></ol>
+          </details>
         </div>
   </div>
 

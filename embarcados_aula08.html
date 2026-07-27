@@ -243,6 +243,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Criar lógica de semáforo com temporização</span>
           </div>
           <div class="ex-desc">Com 3 LEDs (vermelho, amarelo, verde), programar um ciclo de semáforo completo. Verde 5s → Amarelo 2s → Vermelho 5s. Documentar o código com comentários.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte 3 LEDs (vermelho, amarelo, verde) com resistores de 330 ohm nos pinos 10, 11 e 12.</li><li>No código, crie a sequência: verde HIGH por 5000ms, depois LOW; amarelo HIGH por 2000ms, depois LOW; vermelho HIGH por 5000ms, depois LOW; repita.</li><li>Comente cada bloco do código explicando a fase do semáforo.</li><li>Carregue e cronometre com o celular se os tempos batem com o especificado.</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#b36bff">
           <div class="ex-num">02</div>
@@ -253,6 +258,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Aplicar laços de repetição no controle de várias saídas</span>
           </div>
           <div class="ex-desc">Conectar 8 LEDs em pinos digitais distintos e usar um laço for para acendê-los em sequência, criando um efeito de varredura. Reaproveita a ideia do Lab de I/O da disciplina de Arquitetura, com foco em laços de repetição em vez de representação binária.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte 8 LEDs com resistores de 330 ohm nos pinos digitais 2 a 9.</li><li>No setup(), configure todos como OUTPUT (pode usar for(int i=2;i<=9;i++) pinMode(i,OUTPUT);).</li><li>No loop(): for(int i=2;i<=9;i++){ digitalWrite(i,HIGH); delay(100); digitalWrite(i,LOW); }</li><li>Carregue o código e observe o efeito de varredura.</li><li>Desafio extra: inverta o laço (i=9 até i>=2) para o efeito ir-e-voltar.</li></ol>
+          </details>
         </div>
   </div>
 

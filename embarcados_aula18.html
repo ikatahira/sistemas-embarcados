@@ -254,6 +254,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Montar todos os componentes do projeto</span>
           </div>
           <div class="ex-desc">Montar fisicamente todos os componentes planejados no chassi/protoboard: motores, sensores e display, conforme o escopo definido.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Separem todos os componentes listados na ficha de escopo.</li><li>Montem primeiro a base (chassi + motores), depois os sensores, depois o display/LEDs.</li><li>Conferam cada conexão contra o diagrama planejado antes de energizar.</li><li>Fixem bem os fios (fita adesiva/abraçadeiras) para evitar desconexões durante o teste.</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#00e5ff">
           <div class="ex-num">02</div>
@@ -264,6 +269,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Validar cada subsistema isoladamente antes da integração</span>
           </div>
           <div class="ex-desc">Testar isoladamente cada subsistema (motores, sensores, display) antes de integrá-los em um único código, evitando erros difíceis de depurar na integração final.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Testem os motores isoladamente, sem os sensores no código: eles giram nos sentidos esperados?</li><li>Testem os sensores isoladamente, exibindo as leituras no Serial Monitor.</li><li>Testem o display/LEDs isoladamente, exibindo/acendendo valores fixos.</li><li>Anotem qualquer subsistema que não funcionou como esperado, para corrigir antes da integração.</li></ol>
+          </details>
         </div>
   </div>
 

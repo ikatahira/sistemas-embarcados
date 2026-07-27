@@ -244,6 +244,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Ler e exibir temperatura no Serial Monitor</span>
           </div>
           <div class="ex-desc">Conectar o sensor DHT11. Ler temperatura e umidade com a biblioteca DHT. Exibir os valores no Serial Monitor a cada 2 segundos. Adicionar alerta em LED se T > 30°C.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte o DHT11: VCC-5V, GND-GND, DATA-pino digital 7 (com resistor de pull-up de 10k ohm entre DATA e VCC, se o módulo não tiver embutido).</li><li>Instale a biblioteca 'DHT sensor library' pelo Gerenciador de Bibliotecas da IDE.</li><li>Crie o objeto DHT dht(7, DHT11); e no loop leia float t = dht.readTemperature();</li><li>Exiba no Serial Monitor a cada 2 segundos.</li><li>Adicione: if(t > 30) digitalWrite(ledAlerta, HIGH); else digitalWrite(ledAlerta, LOW);</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#ff7a1a">
           <div class="ex-num">02</div>
@@ -254,6 +259,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Usar o sensor ultrassônico HC-SR04</span>
           </div>
           <div class="ex-desc">Calcular a distância usando pulseIn() e a fórmula física (velocidade do som). Acionar buzzer quando a distância for menor que 10 cm.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte o HC-SR04: VCC-5V, GND-GND, TRIG-pino 9, ECHO-pino 10.</li><li>Envie um pulso de 10 microssegundos no TRIG e meça o retorno com duracao = pulseIn(10, HIGH);</li><li>Calcule a distância: distancia_cm = duracao * 0.034 / 2;</li><li>Exiba a distância no Serial Monitor.</li><li>Adicione: if(distancia_cm < 10) digitalWrite(buzzer, HIGH); else digitalWrite(buzzer, LOW);</li></ol>
+          </details>
         </div>
   </div>
 

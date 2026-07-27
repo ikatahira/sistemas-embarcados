@@ -246,6 +246,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Montar o primeiro circuito com LED na protoboard</span>
           </div>
           <div class="ex-desc">Montar um circuito com LED e resistor de 330Ω. Conectar ao pino digital 13 do Arduino e validar o funcionamento com o código Blink já carregado.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte o anodo (perna longa) do LED a um resistor de 330 ohm, e o resistor ao pino digital 13.</li><li>Conecte o catodo (perna curta) do LED ao GND do Arduino.</li><li>No setup(): pinMode(13, OUTPUT);</li><li>No loop(): digitalWrite(13,HIGH); delay(1000); digitalWrite(13,LOW); delay(1000);</li><li>Carregue o código para a placa e observe o LED externo piscar.</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#ffe033">
           <div class="ex-num">02</div>
@@ -256,6 +261,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Criar circuito com entrada digital e botão</span>
           </div>
           <div class="ex-desc">Montar um botão com resistor pull-down de 10kΩ. Programar o Arduino para acender um LED ao pressionar o botão usando digitalRead.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte um terminal do botão ao pino digital 2 e o outro ao GND.</li><li>Conecte um resistor de 10k ohm (pull-down) entre o pino 2 e o GND.</li><li>No setup(): pinMode(2, INPUT);</li><li>No loop(): int estado = digitalRead(2); if(estado==HIGH) digitalWrite(13,HIGH); else digitalWrite(13,LOW);</li><li>Carregue e teste pressionando o botão.</li></ol>
+          </details>
         </div>
   </div>
 

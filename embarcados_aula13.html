@@ -248,6 +248,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Controlar passos e sentido de giro de um motor de passo</span>
           </div>
           <div class="ex-desc">Girar o motor de passo 28BYJ-48, via driver ULN2003, um número definido de passos em ambos os sentidos, usando a biblioteca Stepper.h.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte o motor 28BYJ-48 ao driver ULN2003; conecte IN1-IN4 do driver aos pinos 8, 9, 10, 11 do Arduino.</li><li>Alimente o driver com 5V e GND comum com o Arduino.</li><li>Inclua a biblioteca Stepper.h; defina Stepper meuMotor(2048, 8, 10, 9, 11);</li><li>Código: meuMotor.setSpeed(10); meuMotor.step(2048); depois meuMotor.step(-2048);</li></ol>
+          </details>
         </div>
   </div>
 

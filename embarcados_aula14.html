@@ -246,6 +246,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Controlar posição angular com entrada analógica</span>
           </div>
           <div class="ex-desc">Controlar o ângulo de um servomotor a partir da leitura de um potenciômetro, mapeando o valor analógico (0–1023) para o intervalo de ângulo (0°–180°) com map().</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte o servo: fio marrom/preto-GND, vermelho-5V, sinal (amarelo/laranja)-pino digital 9.</li><li>Conecte um potenciômetro: extremos em 5V/GND, terminal central em A0.</li><li>Inclua Servo.h; crie Servo meuServo; meuServo.attach(9); no setup().</li><li>No loop(): int valor = analogRead(A0); int angulo = map(valor,0,1023,0,180); meuServo.write(angulo);</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#00e5ff">
           <div class="ex-num">02</div>
@@ -256,6 +261,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Comparar desempenho de diferentes atuadores</span>
           </div>
           <div class="ex-desc">Elaborar uma tabela comparativa prática: medir o tempo de resposta e a precisão de motor CC, motor de passo e servo para um deslocamento angular semelhante. Discutir qual atuador é mais adequado para cada aplicação.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Usando os 3 circuitos já montados (motor CC, stepper, servo), defina um deslocamento angular comum para comparar, por exemplo 90 graus.</li><li>Para o motor CC, cronometre girando por um tempo fixo e estime o ângulo percorrido.</li><li>Para o stepper, calcule os passos para 90 graus (2048/4=512) e cronometre o tempo de execução.</li><li>Para o servo, envie write(90) diretamente e cronometre o tempo até estabilizar.</li><li>Preencha uma tabela: atuador, tempo de resposta, precisão, facilidade de controle.</li></ol>
+          </details>
         </div>
   </div>
 

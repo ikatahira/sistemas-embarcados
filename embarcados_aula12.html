@@ -249,6 +249,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Variar a velocidade do motor em tempo real</span>
           </div>
           <div class="ex-desc">Usar um potenciômetro com analogRead() para variar, via analogWrite(), a velocidade do motor CC conectado à ponte H. Exibir o valor de PWM no Serial Monitor.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Mantenha a montagem do exercício anterior (motor + ponte H).</li><li>Conecte um potenciômetro: terminais externos em 5V e GND, terminal central no pino A0.</li><li>Código: int valor = analogRead(A0); int pwm = map(valor,0,1023,0,255); analogWrite(10,pwm);</li><li>Exiba o valor de PWM no Serial Monitor.</li><li>Gire o potenciômetro e observe a mudança suave de velocidade do motor.</li></ol>
+          </details>
         </div>
         <div class="ex-card" style="--card-color:#00e5ff">
           <div class="ex-num">02</div>
@@ -259,6 +264,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Integrar sensor e atuador em uma lógica de segurança</span>
           </div>
           <div class="ex-desc">Integrar o sensor HC-SR04 ao circuito do motor: o motor para automaticamente ao detectar um obstáculo a menos de 15 cm. Primeiro passo em direção à robótica.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Mantenha motor + ponte H já montados; adicione o HC-SR04 (TRIG/ECHO em pinos livres, ex: 11 e 12).</li><li>Calcule a distância como nos exercícios anteriores de sensor.</li><li>No loop: if(distancia < 15) pare o motor (INs em LOW); senão, mantenha girando.</li><li>Teste aproximando um obstáculo da frente do motor/sensor.</li></ol>
+          </details>
         </div>
   </div>
 

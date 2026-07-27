@@ -249,6 +249,11 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Controlar o sentido de giro de um motor CC</span>
           </div>
           <div class="ex-desc">Montar um motor CC conectado a uma ponte H L298N. Usar dois botões para controlar o sentido de giro (horário/anti-horário) e um terceiro para parar o motor.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <ol class="example-steps"><li>Conecte o motor CC aos terminais OUT1/OUT2 da ponte H L298N.</li><li>Conecte IN1 ao pino 8 e IN2 ao pino 9 do Arduino; ENA ao pino 10 (ou jumper fixo em HIGH).</li><li>Alimente a ponte H com fonte externa (6-12V); una o GND da fonte externa ao GND do Arduino. Nunca alimente o motor pelo 5V do Arduino.</li><li>Código: para um sentido, digitalWrite(8,HIGH); digitalWrite(9,LOW); para o outro, inverta; para parar, os dois LOW.</li><li>Use 2 botões para cada sentido e um terceiro para parar.</li></ol>
+          </details>
         </div>
   </div>
 
