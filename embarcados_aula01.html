@@ -132,6 +132,15 @@ details.example-box[open] summary::before{content:'▼ ';}
 .example-steps{font-size:13px;color:var(--text2);line-height:1.9;padding-left:18px;}
 .example-answer{margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(255,224,51,.08);
   border:1px solid rgba(255,224,51,.3);color:var(--yellow);font-family:var(--mono);font-size:12px;display:inline-block;}
+.res-group-title{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--cyan);margin:16px 0 6px;}
+.res-group-title:first-child{margin-top:0;}
+.res-code{background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;
+  margin:10px 0;overflow-x:auto;}
+.res-code pre{font-family:var(--mono);font-size:11.5px;color:var(--green);line-height:1.7;white-space:pre;}
+.res-materials{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0;}
+.res-material{font-family:var(--mono);font-size:10px;color:var(--text);background:var(--bg2);
+  border:1px solid var(--border2);border-radius:20px;padding:4px 12px;}
 .dinamica-box{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;
   padding:22px 28px;position:relative;overflow:hidden;}
 .dinamica-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
@@ -252,6 +261,63 @@ details.example-box[open] summary::before{content:'▼ ';}
             <span class="ex-badge ex-badge-obj">🎯 Montar um circuito com Arduino e programar o pisca-pisca</span>
           </div>
           <div class="ex-desc">Montar um circuito simples ligando um LED ao Arduino Uno usando jumpers e um resistor em protoboard. Programar o Arduino para fazer o LED piscar (acender e apagar em intervalos regulares), enviando também uma mensagem pela Serial identificando o aluno.</div>
+          
+          <details class="example-box" style="margin-top:14px;padding:16px 18px;">
+            <summary>RESOLUÇÃO PASSO A PASSO — clique para ver</summary>
+            <div class="res-group-title">🧰 MATERIAIS NECESSÁRIOS</div><div class="res-materials"><span class="res-material">1x Protoboard</span><span class="res-material">1x Arduino Uno</span><span class="res-material">1x Cabo USB</span><span class="res-material">1x LED (qualquer cor)</span><span class="res-material">1x Resistor 330 ohm</span><span class="res-material">2x Jumpers macho-macho</span></div><div class="res-group-title">🔌 DIAGRAMA DE LIGAÇÃO</div><div class="anim-box" style="max-width:100%"><style>
+    #ledex010 { animation: bb_blinkex010 1.4s steps(1) infinite; }
+    @keyframes bb_blinkex010 { 0%,55% { opacity:1; filter:drop-shadow(0 0 8px #00ff88); } 60%,100% { opacity:.2; filter:none; } }
+    </style><svg viewBox="0 0 480 145" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="8" width="464" height="130" rx="10" fill="var(--bg2)" stroke="var(--border2)"/>
+      <text x="70" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">A</text><text x="96" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">B</text><text x="122" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">C</text><text x="148" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">D</text><text x="174" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">E</text><text x="230" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">F</text><text x="256" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">G</text><text x="282" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">H</text><text x="308" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">I</text><text x="334" y="20" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace">J</text><text x="52" y="43" fill="var(--text2)" font-size="9" text-anchor="end" font-family="monospace">10</text><text x="52" y="69" fill="var(--text2)" font-size="9" text-anchor="end" font-family="monospace">11</text><text x="52" y="95" fill="var(--text2)" font-size="9" text-anchor="end" font-family="monospace">12</text><text x="52" y="121" fill="var(--text2)" font-size="9" text-anchor="end" font-family="monospace">13</text><rect x="188" y="30" width="28" height="98" fill="var(--bg)" stroke="var(--border2)" stroke-width="1" stroke-dasharray="3 3"/><circle cx="70" cy="40" r="2.3" fill="var(--text3)"/><circle cx="96" cy="40" r="2.3" fill="var(--text3)"/><circle cx="122" cy="40" r="2.3" fill="var(--text3)"/><circle cx="148" cy="40" r="2.3" fill="var(--text3)"/><circle cx="174" cy="40" r="2.3" fill="var(--text3)"/><circle cx="230" cy="40" r="2.3" fill="var(--text3)"/><circle cx="256" cy="40" r="2.3" fill="var(--text3)"/><circle cx="282" cy="40" r="2.3" fill="var(--text3)"/><circle cx="308" cy="40" r="2.3" fill="var(--text3)"/><circle cx="334" cy="40" r="2.3" fill="var(--text3)"/><circle cx="70" cy="66" r="2.3" fill="var(--text3)"/><circle cx="96" cy="66" r="2.3" fill="var(--text3)"/><circle cx="122" cy="66" r="2.3" fill="var(--text3)"/><circle cx="148" cy="66" r="2.3" fill="var(--text3)"/><circle cx="174" cy="66" r="2.3" fill="var(--text3)"/><circle cx="230" cy="66" r="2.3" fill="var(--text3)"/><circle cx="256" cy="66" r="2.3" fill="var(--text3)"/><circle cx="282" cy="66" r="2.3" fill="var(--text3)"/><circle cx="308" cy="66" r="2.3" fill="var(--text3)"/><circle cx="334" cy="66" r="2.3" fill="var(--text3)"/><circle cx="70" cy="92" r="2.3" fill="var(--text3)"/><circle cx="96" cy="92" r="2.3" fill="var(--text3)"/><circle cx="122" cy="92" r="2.3" fill="var(--text3)"/><circle cx="148" cy="92" r="2.3" fill="var(--text3)"/><circle cx="174" cy="92" r="2.3" fill="var(--text3)"/><circle cx="230" cy="92" r="2.3" fill="var(--text3)"/><circle cx="256" cy="92" r="2.3" fill="var(--text3)"/><circle cx="282" cy="92" r="2.3" fill="var(--text3)"/><circle cx="308" cy="92" r="2.3" fill="var(--text3)"/><circle cx="334" cy="92" r="2.3" fill="var(--text3)"/><circle cx="70" cy="118" r="2.3" fill="var(--text3)"/><circle cx="96" cy="118" r="2.3" fill="var(--text3)"/><circle cx="122" cy="118" r="2.3" fill="var(--text3)"/><circle cx="148" cy="118" r="2.3" fill="var(--text3)"/><circle cx="174" cy="118" r="2.3" fill="var(--text3)"/><circle cx="230" cy="118" r="2.3" fill="var(--text3)"/><circle cx="256" cy="118" r="2.3" fill="var(--text3)"/><circle cx="282" cy="118" r="2.3" fill="var(--text3)"/><circle cx="308" cy="118" r="2.3" fill="var(--text3)"/><circle cx="334" cy="118" r="2.3" fill="var(--text3)"/>
+    <line x1="96" y1="40" x2="96" y2="118" stroke="var(--text2)" stroke-width="2.5"/>
+    <rect x="87" y="62" width="18" height="42" rx="3" fill="var(--bg2)" stroke="var(--text2)" stroke-width="1.5"/>
+    <rect x="87" y="67" width="18" height="6" fill="#ff7a1a"/>
+    <rect x="87" y="77" width="18" height="6" fill="#ff7a1a"/>
+    <rect x="87" y="87" width="18" height="6" fill="#8b5a2b"/>
+    <rect x="87" y="99" width="18" height="4" fill="#d4af37"/>
+    <text x="118" y="72" fill="var(--text2)" font-size="8.5" font-family="monospace">laranja</text>
+    <text x="118" y="82" fill="var(--text2)" font-size="8.5" font-family="monospace">laranja</text>
+    <text x="118" y="92" fill="var(--text2)" font-size="8.5" font-family="monospace">marrom</text>
+    <text x="118" y="102" fill="var(--text2)" font-size="8.5" font-family="monospace">dourado</text>
+    <text x="96" y="132" fill="var(--yellow)" font-size="9" text-anchor="middle" font-family="monospace">330 ohm</text>
+    
+    <line x1="148" y1="40" x2="199" y2="40" stroke="var(--text2)" stroke-width="2"/>
+    <line x1="230" y1="40" x2="215" y2="40" stroke="var(--text2)" stroke-width="2"/>
+    <circle id="ledex010" cx="207" cy="40" r="10" fill="#00ff88"/>
+    <rect x="213" y="31" width="3" height="18" fill="var(--bg)"/>
+    <text x="207" y="15" fill="var(--text)" font-size="9" text-anchor="middle" font-family="monospace">LED</text>
+    <text x="160" y="56" fill="var(--green)" font-size="8.5" text-anchor="middle" font-family="monospace">anodo (+)</text>
+    <text x="225" y="56" fill="var(--red)" font-size="8.5" text-anchor="middle" font-family="monospace">catodo (-)</text>
+    
+    <rect x="10" y="100" width="34" height="36" rx="6" fill="var(--bg2)" stroke="#00ff88" stroke-width="1.5"/>
+    <text x="27" y="115" fill="#00ff88" font-size="8" text-anchor="middle" font-family="monospace">ARDUINO</text>
+    <text x="27" y="127" fill="#00ff88" font-size="10" text-anchor="middle" font-family="monospace" font-weight="bold">13</text>
+    <path d="M44,118 Q60,118 70,118" fill="none" stroke="#ff7a1a" stroke-width="2.5"/>
+
+    <rect x="436" y="24" width="34" height="36" rx="6" fill="var(--bg2)" stroke="var(--text2)" stroke-width="1.5"/>
+    <text x="453" y="39" fill="var(--text2)" font-size="8" text-anchor="middle" font-family="monospace">ARDUINO</text>
+    <text x="453" y="51" fill="var(--text2)" font-size="9" text-anchor="middle" font-family="monospace" font-weight="bold">GND</text>
+    <path d="M436,42 Q380,42 334,40" fill="none" stroke="#333333" stroke-width="2.5"/>
+    
+    </svg></div><div class="res-group-title">① IDENTIFIQUE O RESISTOR PELO CÓDIGO DE CORES</div><ol class="example-steps"><li>Pegue o resistor indicado para este exercício: 330 ohm.</li><li>Leia as 4 faixas coloridas da esquerda para a direita: <b>laranja</b> (3), <b>laranja</b> (3), <b>marrom</b> (multiplicador x10) e <b>dourado</b> (tolerância ±5%).</li><li>Cálculo: 33 × 10 = <b>330 ohm</b>. Se o seu resistor tiver cores diferentes, calcule da mesma forma antes de montar.</li></ol><div class="res-group-title">② MONTE O RESISTOR NA PROTOBOARD</div><ol class="example-steps"><li>Com o Arduino ainda <b>desconectado</b> do USB, posicione a protoboard com o canal central na vertical.</li><li>Encaixe uma perna do resistor na <b>linha 10, coluna B</b> (bloco A-E).</li><li>Encaixe a outra perna do resistor na <b>linha 13, coluna B</b> (mesmo bloco A-E, 3 linhas abaixo).</li></ol><div class="res-group-title">③ MONTE O LED NA PROTOBOARD</div><ol class="example-steps"><li>Identifique as pernas do LED: a <b>perna mais longa é o ânodo (+)</b> e a <b>mais curta é o cátodo (-)</b>.</li><li>Encaixe a perna longa (ânodo) na <b>linha 10, coluna D</b> — na mesma linha 10 onde já está uma perna do resistor (colunas B e D estão eletricamente ligadas, pois pertencem à mesma linha do mesmo bloco A-E).</li><li>Encaixe a perna curta (cátodo) na <b>linha 10, coluna F</b>, do outro lado do canal central (bloco F-J).</li></ol><div class="res-group-title">④ LIGUE OS JUMPERS AO ARDUINO</div><ol class="example-steps"><li>Jumper 1 (sinal): conecte uma ponta na <b>linha 13, coluna A</b> (mesma linha da 2ª perna do resistor) e a outra ponta no <b>pino digital 13</b> do Arduino.</li><li>Jumper 2 (terra): conecte uma ponta na <b>linha 10, coluna J</b> (mesma linha do cátodo do LED, bloco F-J) e a outra ponta no pino <b>GND</b> do Arduino.</li><li>Confira visualmente: Arduino pino 13 → resistor → LED (ânodo→cátodo) → Arduino GND. Essa é a ordem elétrica do circuito.</li></ol><div class="res-group-title">⑤ ESCREVA O CÓDIGO</div><ol class="example-steps"><li>Conecte o Arduino ao computador pelo cabo USB.</li><li>Abra a IDE Arduino e crie um novo sketch.</li><li>Digite (ou copie) o código completo mostrado abaixo, substituindo [SEU NOME AQUI] pelo seu nome.</li><li>Em Ferramentas → Placa, selecione 'Arduino Uno'; em Ferramentas → Porta, selecione a porta correta.</li></ol><div class="res-group-title">⑥ CARREGUE E TESTE</div><ol class="example-steps"><li>Clique no botão Carregar (seta →) e aguarde a mensagem 'Carregado' na parte inferior da IDE.</li><li>Observe o LED na protoboard: ele deve piscar (1s aceso, 1s apagado).</li><li>Abra o Serial Monitor (ícone de lupa, canto superior direito, 9600 baud) e confira se sua mensagem de identificação aparece a cada ciclo.</li><li>Se o LED não acender: confira a polaridade (perna longa no lado do resistor), o valor do resistor e se os jumpers estão nas linhas corretas.</li></ol><div class="res-group-title">💻 CÓDIGO COMPLETO</div><div class="res-code"><pre>int pinoLED = 13;
+
+void setup() {
+  pinMode(pinoLED, OUTPUT);
+  Serial.begin(9600);
+  Serial.println("Sistema iniciado por: [SEU NOME AQUI]");
+}
+
+void loop() {
+  digitalWrite(pinoLED, HIGH);
+  Serial.println("LED aceso");
+  delay(1000);
+
+  digitalWrite(pinoLED, LOW);
+  Serial.println("LED apagado");
+  delay(1000);
+}</pre></div><div class="example-answer">✅ LED pisca a cada 1 segundo e o Serial Monitor exibe seu nome e o estado do LED a cada ciclo.</div>
+          </details>
         </div>
   </div>
 
