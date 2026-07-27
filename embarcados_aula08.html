@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aula 08 — Laços de Repetição e Entradas Digitais | Desenvolvimento de Sistemas Embarcados</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Unbounded:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root { --accent: #00e5ff; }
+
+:root {
+  --bg: #0b0f0e; --bg2: #111715; --bg3: #161d1b; --panel: #0e1310;
+  --green: #00ff88; --green2: #00c967; --cyan: #00e5ff;
+  --yellow: #ffe033; --orange: #ff7a1a; --red: #ff3b5c; --purple: #b36bff;
+  --text: #e8f0ec; --text2: #7a9488; --text3: #3a5248;
+  --border: #1e2e28; --border2: #243830;
+  --mono: 'Space Mono', monospace;
+  --display: 'Unbounded', sans-serif;
+  --body: 'DM Sans', sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--body);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity:.4;
+}
+header{padding:48px 40px 32px;border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+header::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--accent),transparent);}
+.header-tag{font-family:var(--mono);font-size:10px;color:var(--accent);
+  letter-spacing:.25em;text-transform:uppercase;margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;}
+.header-tag::before{content:'';width:24px;height:1px;background:var(--accent);}
+.header-title{font-family:var(--display);font-size:clamp(20px,3.5vw,40px);
+  font-weight:900;line-height:1.05;letter-spacing:-.02em;color:var(--text);max-width:760px;}
+.header-title span{color:var(--accent);}
+.header-subtitle{margin-top:10px;font-size:14px;color:var(--text2);max-width:620px;line-height:1.6;font-weight:300;}
+.header-meta{position:absolute;top:48px;right:40px;text-align:right;
+  font-family:var(--mono);font-size:10px;color:var(--text3);line-height:1.8;}
+.container{max-width:1200px;margin:0 auto;padding:0 40px 80px;}
+.section-label{font-family:var(--mono);font-size:9px;color:var(--accent);
+  letter-spacing:.25em;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;margin-bottom:20px;margin-top:52px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border2);}
+.obj-box{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;
+  padding:28px 32px;position:relative;overflow:hidden;}
+.obj-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--accent),var(--cyan),var(--accent));}
+.obj-title{font-family:var(--display);font-size:12px;font-weight:700;
+  color:var(--accent);letter-spacing:.1em;margin-bottom:16px;}
+.obj-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.obj-list li{font-size:14px;color:var(--text);line-height:1.5;
+  display:flex;align-items:flex-start;gap:10px;}
+.obj-list li::before{content:'▸';color:var(--accent);font-size:12px;margin-top:2px;flex-shrink:0;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;}
+.ex-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+  padding:24px 20px;position:relative;overflow:hidden;transition:all .2s;}
+.ex-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--card-color,var(--accent));opacity:.5;transition:opacity .2s;}
+.ex-card:hover{border-color:var(--border2);background:var(--bg2);transform:translateY(-2px);
+  box-shadow:0 8px 24px rgba(0,0,0,.4);}
+.ex-card:hover::before{opacity:1;}
+.ex-num{font-family:var(--display);font-size:48px;font-weight:900;
+  color:var(--border2);position:absolute;top:10px;right:16px;line-height:1;pointer-events:none;}
+.ex-tag{font-family:var(--mono);font-size:9px;color:var(--card-color,var(--accent));
+  letter-spacing:.2em;margin-bottom:8px;}
+.ex-title{font-size:15px;font-weight:600;color:var(--text);margin-bottom:8px;}
+.ex-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;}
+.ex-badge{font-family:var(--mono);font-size:10px;padding:3px 10px;border-radius:4px;border:1px solid;}
+.ex-badge-time{color:var(--yellow);border-color:rgba(255,224,51,.3);background:rgba(255,224,51,.07);}
+.ex-badge-obj {color:var(--cyan); border-color:rgba(0,229,255,.3); background:rgba(0,229,255,.07);}
+.ex-desc{font-size:12px;color:var(--text2);line-height:1.6;}
+.dica-box{background:var(--bg3);border:1px solid rgba(255,224,51,.2);border-radius:10px;
+  padding:20px 24px;position:relative;overflow:hidden;margin-top:16px;}
+.dica-box::before{content:'💡';position:absolute;right:20px;top:16px;font-size:36px;opacity:.15;}
+.dica-title{font-family:var(--display);font-size:11px;font-weight:700;
+  color:var(--yellow);letter-spacing:.1em;margin-bottom:8px;}
+.dica-text{font-size:13px;color:var(--text2);line-height:1.75;max-width:720px;}
+.tag-pill{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.15em;
+  padding:4px 10px;border-radius:20px;border:1px solid;margin-right:6px;margin-bottom:6px;text-transform:uppercase;}
+.pill-novo{color:var(--red);border-color:rgba(255,59,92,.35);background:rgba(255,59,92,.08);}
+.pill-adaptado{color:var(--yellow);border-color:rgba(255,224,51,.35);background:rgba(255,224,51,.08);}
+.pill-reaproveitado{color:var(--green);border-color:rgba(0,255,136,.35);background:rgba(0,255,136,.08);}
+.nav-bar{display:flex;gap:10px;flex-wrap:wrap;padding:24px 40px;
+  border-top:1px solid var(--border);margin-top:40px;}
+.nav-btn{font-family:var(--mono);font-size:10px;letter-spacing:.08em;
+  padding:10px 20px;border-radius:6px;text-decoration:none;border:1px solid;
+  transition:all .2s;display:inline-flex;align-items:center;gap:6px;}
+.nav-btn-sec{color:var(--text2);border-color:var(--border2);background:transparent;}
+.nav-btn-sec:hover{color:var(--text);border-color:var(--text2);}
+.nav-btn-pri{color:var(--accent);border-color:rgba(0,255,136,.3);background:rgba(0,255,136,.06);}
+.nav-btn-pri:hover{background:rgba(0,255,136,.14);}
+footer{border-top:1px solid var(--border);padding:28px 40px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+.footer-left{font-family:var(--mono);font-size:10px;color:var(--text3);line-height:1.8;}
+.footer-sig{color:var(--accent);font-weight:700;}
+@media(max-width:768px){
+  header{padding:28px 20px 20px;} .header-meta{display:none;}
+  .container{padding:0 20px 60px;} .nav-bar{padding:20px;}
+  .ex-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-tag">AULA 08 · TÉCNICO EM INFORMÁTICA · EMB-935</div>
+  <h1 class="header-title">Aula 08<br><span>Laços de Repetição e Entradas Digitais</span></h1>
+  <p class="header-subtitle">Bloco C (conclusão) · digitalRead, millis() e laços for aplicados a múltiplas saídas</p>
+  <div class="header-meta">
+    TÉCNICO EM INFORMÁTICA · 935<br>
+    MÓDULO II.2 · SIST. EMBARCADOS<br>
+    <span style="color:#00e5ff">ADAPTADO DE AOC/ADS</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <div style="margin-bottom:8px"><span class="tag-pill pill-adaptado">ADAPTADO DE AOC/ADS</span></div>
+
+  <div class="section-label">01 · Objetivos de Aprendizagem</div>
+  
+  <div class="obj-box">
+    <div class="obj-title">🎯 OBJETIVOS DA SEMANA</div>
+    <ul class="obj-list"><li>Usar laços de repetição (for/while) para controlar múltiplas saídas</li><li>Usar comunicação serial para debug via Serial Monitor</li></ul>
+  </div>
+
+  <div class="section-label">02 · Conteúdo Programático</div>
+  
+  <div class="obj-box">
+    <div class="obj-title">📖 TÓPICOS ABORDADOS</div>
+    <ul class="obj-list"><li>Controle de tempo: delay() e millis()</li><li>Laços de repetição (for) aplicados ao controle de múltiplas saídas</li><li>Serial Monitor para debug</li></ul>
+  </div>
+
+  <div class="section-label">03 · Atividades Práticas</div>
+  <div class="ex-grid">
+        <div class="ex-card" style="--card-color:#ffe033">
+          <div class="ex-num">01</div>
+          <div class="ex-tag">EX-01 · EXERCÍCIO</div>
+          <div class="ex-title">Semáforo Simples</div>
+          <div class="ex-meta">
+            <span class="ex-badge ex-badge-time">⏱ 25 min</span>
+            <span class="ex-badge ex-badge-obj">🎯 Criar lógica de semáforo com temporização</span>
+          </div>
+          <div class="ex-desc">Com 3 LEDs (vermelho, amarelo, verde), programar um ciclo de semáforo completo. Verde 5s → Amarelo 2s → Vermelho 5s. Documentar o código com comentários.</div>
+        </div>
+        <div class="ex-card" style="--card-color:#b36bff">
+          <div class="ex-num">02</div>
+          <div class="ex-tag">EX-02 · EXERCÍCIO</div>
+          <div class="ex-title">Sequência de LEDs em Loop (Efeito Knight Rider)</div>
+          <div class="ex-meta">
+            <span class="ex-badge ex-badge-time">⏱ 30 min</span>
+            <span class="ex-badge ex-badge-obj">🎯 Aplicar laços de repetição no controle de várias saídas</span>
+          </div>
+          <div class="ex-desc">Conectar 8 LEDs em pinos digitais distintos e usar um laço for para acendê-los em sequência, criando um efeito de varredura. Reaproveita a ideia do Lab de I/O da disciplina de Arquitetura, com foco em laços de repetição em vez de representação binária.</div>
+        </div>
+  </div>
+
+  <div class="dica-box">
+    <div class="dica-title">💡 NOTA DE ADAPTAÇÃO</div>
+    <div class="dica-text">O último exercício reaproveita a ideia do Lab de E/S com LEDs de Arquitetura, reenquadrado para reforçar laços de repetição (base tecnológica 4 da ementa 935).</div>
+  </div>
+
+</div>
+
+<div class="nav-bar">
+  <a href="embarcados_index.html" class="nav-btn nav-btn-sec">⬅ Índice</a>
+  <a href="embarcados_aula07.html" class="nav-btn nav-btn-sec">← Aula 07</a>
+  <a href="embarcados_aula09.html" class="nav-btn nav-btn-pri">Aula 09 →</a>
+</div>
+
+<footer>
+  <div class="footer-left">
+    <span class="footer-sig">DESENVOLVIMENTO DE SISTEMAS EMBARCADOS</span><br>
+    AULA 08 · Aula 08 — Laços de Repetição e Entradas Digitais<br>
+    Centro Paula Souza · FATEC/ETEC · Técnico em Informática · 2026
+  </div>
+  <div style="font-family:var(--mono);font-size:9px;color:var(--text3);text-align:right;">
+    EMB-935 · AULA 08<br>
+    <span style="color:#00e5ff">AULA TEÓRICO-PRÁTICA</span>
+  </div>
+</footer>
+
+</body>
+</html>
