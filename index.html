@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desenvolvimento de Sistemas Embarcados — Índice | Técnico em Informática 935</title>
+<title>Desenvolvimento de Sistemas Embarcados — Índice</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Unbounded:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root { --accent: #00ff88; }
@@ -102,6 +102,73 @@ footer{border-top:1px solid var(--border);padding:28px 40px;
   .ex-grid{grid-template-columns:1fr;}
 }
 
+.anim-box{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;
+  padding:14px;display:flex;align-items:center;justify-content:center;}
+.anim-box svg{width:100%;max-width:320px;height:auto;}
+.gami-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  background:var(--bg3);border:1px solid var(--border2);border-radius:12px;
+  padding:14px 20px;margin-top:22px;font-family:var(--mono);font-size:11px;color:var(--text2);}
+.gami-chip{display:flex;align-items:center;gap:6px;padding:6px 12px;border-radius:20px;
+  background:var(--bg2);border:1px solid var(--border2);}
+.gami-chip b{color:var(--accent);font-size:13px;}
+.gami-reset{margin-left:auto;color:var(--text3);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:var(--mono);font-size:10px;}
+.badge-toast{display:none;margin-top:10px;padding:12px 16px;border-radius:10px;
+  background:rgba(0,255,136,.1);border:1px solid rgba(0,255,136,.4);color:var(--green);
+  font-family:var(--mono);font-size:12px;align-items:center;gap:10px;}
+.badge-toast.show{display:flex;animation:toastIn .4s ease;}
+@keyframes toastIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.two-col{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:stretch;}
+@media(max-width:820px){.two-col{grid-template-columns:1fr;}}
+details.example-box{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;
+  padding:20px 26px;position:relative;overflow:hidden;}
+details.example-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--yellow),var(--orange),var(--yellow));}
+details.example-box summary{cursor:pointer;font-family:var(--display);font-size:12px;
+  font-weight:700;color:var(--yellow);letter-spacing:.06em;list-style:none;}
+details.example-box summary::-webkit-details-marker{display:none;}
+details.example-box summary::before{content:'▶ ';color:var(--yellow);}
+details.example-box[open] summary::before{content:'▼ ';}
+.example-statement{font-size:13.5px;color:var(--text);margin:14px 0;line-height:1.6;}
+.example-steps{font-size:13px;color:var(--text2);line-height:1.9;padding-left:18px;}
+.example-answer{margin-top:10px;padding:10px 14px;border-radius:8px;background:rgba(255,224,51,.08);
+  border:1px solid rgba(255,224,51,.3);color:var(--yellow);font-family:var(--mono);font-size:12px;display:inline-block;}
+.dinamica-box{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;
+  padding:22px 28px;position:relative;overflow:hidden;}
+.dinamica-box::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--purple),var(--cyan),var(--purple));}
+.dinamica-title{font-family:var(--display);font-size:12px;font-weight:700;color:var(--purple);
+  letter-spacing:.08em;margin-bottom:10px;}
+.dinamica-text{font-size:13.5px;color:var(--text2);line-height:1.75;}
+.quiz-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;
+  padding:20px 24px;margin-bottom:14px;}
+.quiz-q{font-size:14px;color:var(--text);font-weight:600;margin-bottom:12px;}
+.quiz-type-tag{font-family:var(--mono);font-size:9px;color:var(--cyan);letter-spacing:.15em;
+  border:1px solid rgba(0,229,255,.3);background:rgba(0,229,255,.07);border-radius:20px;
+  padding:2px 10px;margin-bottom:10px;display:inline-block;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;}
+.quiz-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:8px;
+  border:1px solid var(--border2);background:var(--bg2);cursor:pointer;font-size:13px;color:var(--text);transition:all .15s;}
+.quiz-opt:hover{border-color:var(--text2);}
+.quiz-opt.correct{border-color:var(--green);background:rgba(0,255,136,.1);color:var(--green);}
+.quiz-opt.wrong{border-color:var(--red);background:rgba(255,59,92,.1);color:var(--red);}
+.quiz-vf{display:flex;gap:10px;}
+.quiz-vf button{flex:1;padding:10px;border-radius:8px;border:1px solid var(--border2);
+  background:var(--bg2);color:var(--text);font-family:var(--mono);font-size:12px;cursor:pointer;}
+.quiz-vf button.correct{border-color:var(--green);background:rgba(0,255,136,.1);color:var(--green);}
+.quiz-vf button.wrong{border-color:var(--red);background:rgba(255,59,92,.1);color:var(--red);}
+.quiz-fill{display:flex;gap:10px;flex-wrap:wrap;}
+.quiz-fill input{flex:1;min-width:140px;padding:10px 14px;border-radius:8px;border:1px solid var(--border2);
+  background:var(--bg2);color:var(--text);font-family:var(--mono);font-size:13px;}
+.quiz-fill button{padding:10px 18px;border-radius:8px;border:1px solid var(--accent);
+  background:rgba(0,255,136,.08);color:var(--accent);font-family:var(--mono);font-size:11px;cursor:pointer;}
+.quiz-explain{margin-top:10px;font-size:12px;color:var(--text2);line-height:1.6;
+  padding-top:10px;border-top:1px dashed var(--border2);display:none;}
+.quiz-explain.show{display:block;}
+.quiz-feedback{margin-top:8px;font-family:var(--mono);font-size:11px;display:none;}
+.quiz-feedback.show{display:block;}
+.quiz-feedback.ok{color:var(--green);}
+.quiz-feedback.bad{color:var(--red);}
+
 .hero{padding:56px 40px 40px;border-bottom:1px solid var(--border);position:relative;}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
   background:linear-gradient(90deg,transparent,var(--green),transparent);}
@@ -118,7 +185,9 @@ footer{border-top:1px solid var(--border);padding:28px 40px;
 .stat-label{font-family:var(--mono);font-size:9px;color:var(--text2);letter-spacing:.1em;text-transform:uppercase;margin-top:4px;}
 .ementa-box{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;padding:26px 30px;margin-top:20px;font-size:13px;color:var(--text2);line-height:1.9;}
 .ementa-box b{color:var(--text);}
-.legend-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:10px;font-size:12px;color:var(--text2);}
+.badge-map{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,1fr));gap:8px;margin-top:16px;}
+.badge-slot{aspect-ratio:1;border-radius:10px;border:1px solid var(--border2);background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--text3);}
 .aula-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px;}
 .aula-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;
   padding:16px 18px;position:relative;overflow:hidden;transition:all .2s;text-decoration:none;display:block;}
@@ -145,42 +214,41 @@ footer{border-top:1px solid var(--border);padding:28px 40px;
 <div class="hero">
   <div class="header-tag">EMB-935 · ÍNDICE DA DISCIPLINA · TÉCNICO EM INFORMÁTICA</div>
   <h1 class="hero-title">Desenvolvimento de<br><span>Sistemas Embarcados</span></h1>
-  <p class="hero-sub">Habilitação Profissional de Técnico em Informática (935) · Centro Paula Souza · Módulo II.2 — Instalação e configuração de sistemas embarcados. Curadoria e adaptação dos laboratórios Arduino/ESP32 da disciplina Arquitetura e Organização de Computadores (Curso Superior ADS), complementada com módulos novos de eletrônica analógica, motores e robótica.</p>
+  <p class="hero-sub">Curso gamificado de Sistemas Embarcados: eletrônica analógica, microcontroladores, sensores, motores e robótica, com quizzes, exemplos resolvidos, animações e dinâmicas de sala em cada aula.</p>
   <div class="stat-strip">
     <span class="stat-chip">⚙ 20 AULAS</span>
-    <span class="stat-chip">⏱ 40 HORAS-AULA (2 h.a. / aula)</span>
-    <span class="stat-chip">🔬 5 BLOCOS TEMÁTICOS (A/B, C, D, E, F)</span>
+    <span class="stat-chip">⏱ 40 HORAS-AULA</span>
     <span class="stat-chip">🧪 ARDUINO UNO</span>
     <span class="stat-chip">🎯 1 PROJETO INTEGRADO FINAL</span>
+    <span class="stat-chip">🎮 100% GAMIFICADO</span>
   </div>
   <div class="stat-grid">
     <div class="stat-box"><div class="stat-num">20</div><div class="stat-label">Aulas</div></div>
     <div class="stat-box"><div class="stat-num">40h</div><div class="stat-label">Carga horária</div></div>
-    <div class="stat-box"><div class="stat-num">5</div><div class="stat-label">Blocos temáticos</div></div>
-    <div class="stat-box"><div class="stat-num">10</div><div class="stat-label">Aulas novas</div></div>
-    <div class="stat-box"><div class="stat-num">10</div><div class="stat-label">Aulas adaptadas</div></div>
+    <div class="stat-box"><div class="stat-num" id="idxBadgeCount">0</div><div class="stat-label">Selos conquistados / 20</div></div>
+    <div class="stat-box"><div class="stat-num" id="idxXpTotal">0</div><div class="stat-label">XP total acumulado</div></div>
   </div>
   <div class="toc"><a href="#a01">Bloco A / B — Eletrônica Analógica, Segurança e Ergonomia</a><a href="#a05">Bloco C — Microcontrolador e Programação Estruturada</a><a href="#a09">Bloco D — Sensores, Atuadores Simples e Displays</a><a href="#a11">Bloco E — Motores e Atuadores de Potência</a><a href="#a15">Bloco F — Robótica e Projeto Integrado</a></div>
 </div>
 
 <div class="container">
 
-  <div class="section-label">📋 Ementa Oficial — Plano de Curso 935, Módulo II.2</div>
+  <div class="section-label">📋 Ementa — Instalação e Configuração de Sistemas Embarcados</div>
   <div class="ementa-box">
-    <b>Função:</b> Instalação e configuração de sistemas embarcados — Classificação: Execução.<br><br>
     <b>Competência:</b> Configurar plataforma de microcontroladores no desenvolvimento de sistemas embarcados.<br><br>
-    <b>Habilidades:</b> Aplicar técnicas de programação estruturada para processar entradas e saídas entre o dispositivo e os componentes conectados · Executar procedimentos de testes de programas estruturados no microcontrolador.<br><br>
-    <b>Bases tecnológicas:</b> (1) Conceitos básicos de eletricidade e eletrônica analógica · (2) Ergonomia no Laboratório de Informática · (3) Segurança no manuseio de partes, peças e instrumentos de medição · (4) Introdução aos conceitos de sistemas embarcados · (5) Introdução ao microcontrolador · (6) Projetos com utilização de microcontrolador (LEDs, sonorizadores, sensores, motor CC, displays, motores de passo e robôs, sensores) · (7) Projetos e aplicações em Robótica.<br><br>
-    <b>Ferramentas de apoio:</b> Arduino IDE, TinkerCad, Ardusim. Carga horária: 40 horas-aula (aqui organizadas em 20 aulas de ~2 horas-aula cada).
+    <b>Você vai aprender:</b> eletricidade e eletrônica analógica · segurança e ergonomia em laboratório · hardware e programação de microcontroladores · sensores, displays e atuadores · motores CC, motores de passo e servomotores · robótica e projeto integrado.<br><br>
+    <b>Ferramentas:</b> Arduino IDE, TinkerCad, Ardusim. Carga horária: 40 horas-aula, organizadas em 20 aulas.
   </div>
 
-  <div class="section-label">🗂️ Legenda de Proveniência do Conteúdo</div>
-  <div class="legend-row"><span class="tag-pill pill-novo">CONTEÚDO NOVO</span> criado especificamente para esta disciplina — sem equivalente no material de Arquitetura e Organização de Computadores</div>
-  <div class="legend-row"><span class="tag-pill pill-adaptado">ADAPTADO DE AOC/ADS</span> reaproveita a estrutura/objetivo de um lab de Arquitetura, com conteúdo técnico ajustado, simplificado ou ampliado</div>
-  <div class="legend-row"><span class="tag-pill pill-reaproveitado">REAPROVEITADO DE AOC/ADS</span> aula praticamente idêntica ao material original de Arquitetura (mesmos objetivos e atividades)</div>
+  <div class="section-label">🏆 Mapa de Selos da Turma</div>
+  <div class="ementa-box">
+    Complete o quiz de cada aula para desbloquear o selo correspondente. Seu progresso fica salvo neste navegador.
+    <div class="badge-map"><div class="badge-slot" data-slot="01">A01</div><div class="badge-slot" data-slot="02">A02</div><div class="badge-slot" data-slot="03">A03</div><div class="badge-slot" data-slot="04">A04</div><div class="badge-slot" data-slot="05">A05</div><div class="badge-slot" data-slot="06">A06</div><div class="badge-slot" data-slot="07">A07</div><div class="badge-slot" data-slot="08">A08</div><div class="badge-slot" data-slot="09">A09</div><div class="badge-slot" data-slot="10">A10</div><div class="badge-slot" data-slot="11">A11</div><div class="badge-slot" data-slot="12">A12</div><div class="badge-slot" data-slot="13">A13</div><div class="badge-slot" data-slot="14">A14</div><div class="badge-slot" data-slot="15">A15</div><div class="badge-slot" data-slot="16">A16</div><div class="badge-slot" data-slot="17">A17</div><div class="badge-slot" data-slot="18">A18</div><div class="badge-slot" data-slot="19">A19</div><div class="badge-slot" data-slot="20">A20</div></div>
+    <button class="gami-reset" style="margin-top:14px" onclick="embIndexReset()">reiniciar todo o meu progresso</button>
+  </div>
 
   
-  <div class="block-label"><span class="block-badge">BLOCO A / B</span> Eletrônica Analógica, Segurança e Ergonomia <span class="block-sub">· Aulas 01–04 · Bases tecnológicas 1, 2 e 3 — conteúdo 100% novo</span></div>
+  <div class="block-label"><span class="block-badge">BLOCO A / B</span> Eletrônica Analógica, Segurança e Ergonomia <span class="block-sub">· Aulas 01–04</span></div>
   <div class="aula-grid"><a href="embarcados_aula01.html" class="aula-card" id="a01" style="--wk-color:#00ff88">
       <div class="aula-top"><span class="aula-num">A01</span><span class="aula-name">Tensão, Corrente e Resistência Elétrica</span></div>
       <div class="aula-sub">Bloco A · Grandezas elétricas fundamentais e uso do multímetro</div>
@@ -194,7 +262,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;
       <div class="aula-top"><span class="aula-num">A04</span><span class="aula-name">Semicondutores, Diodos, Segurança e Ergonomia</span></div>
       <div class="aula-sub">Bloco A (conclusão) + Bloco B · Diodo semicondutor e normas de segurança no laboratório</div>
     </a></div>
-  <div class="block-label"><span class="block-badge">BLOCO C</span> Microcontrolador e Programação Estruturada <span class="block-sub">· Aulas 05–08 · Bases tecnológicas 4 e 5 — adaptado das Semanas 13–14 de AOC</span></div>
+  <div class="block-label"><span class="block-badge">BLOCO C</span> Microcontrolador e Programação Estruturada <span class="block-sub">· Aulas 05–08</span></div>
   <div class="aula-grid"><a href="embarcados_aula05.html" class="aula-card" id="a05" style="--wk-color:#00ff88">
       <div class="aula-top"><span class="aula-num">A05</span><span class="aula-name">Instalação da IDE e Hardware do Arduino</span></div>
       <div class="aula-sub">Bloco C · Instalação do ambiente e reconhecimento da placa Arduino Uno</div>
@@ -208,7 +276,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;
       <div class="aula-top"><span class="aula-num">A08</span><span class="aula-name">Laços de Repetição e Entradas Digitais</span></div>
       <div class="aula-sub">Bloco C (conclusão) · digitalRead, millis() e laços for aplicados a múltiplas saídas</div>
     </a></div>
-  <div class="block-label"><span class="block-badge">BLOCO D</span> Sensores, Atuadores Simples e Displays <span class="block-sub">· Aulas 09–10 · Base tecnológica 6 (parte) — adaptado da Semana 15 e do Lab 10 (I²C) de AOC</span></div>
+  <div class="block-label"><span class="block-badge">BLOCO D</span> Sensores, Atuadores Simples e Displays <span class="block-sub">· Aulas 09–10</span></div>
   <div class="aula-grid"><a href="embarcados_aula09.html" class="aula-card" id="a09" style="--wk-color:#b36bff">
       <div class="aula-top"><span class="aula-num">A09</span><span class="aula-name">Sensores Analógicos e Digitais (DHT11, HC-SR04)</span></div>
       <div class="aula-sub">Bloco D · Leitura de temperatura e distância com sensores</div>
@@ -216,7 +284,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;
       <div class="aula-top"><span class="aula-num">A10</span><span class="aula-name">Display LCD, Servomotor e Buzzer</span></div>
       <div class="aula-sub">Bloco D (conclusão) · Display de cristal líquido via I²C e atuadores simples</div>
     </a></div>
-  <div class="block-label"><span class="block-badge">BLOCO E</span> Motores e Atuadores de Potência <span class="block-sub">· Aulas 11–14 · Base tecnológica 6 (parte) — conteúdo 100% novo: motor CC, ponte H, motor de passo, servo</span></div>
+  <div class="block-label"><span class="block-badge">BLOCO E</span> Motores e Atuadores de Potência <span class="block-sub">· Aulas 11–14</span></div>
   <div class="aula-grid"><a href="embarcados_aula11.html" class="aula-card" id="a11" style="--wk-color:#ff7a1a">
       <div class="aula-top"><span class="aula-num">A11</span><span class="aula-name">Motor CC e Ponte H</span></div>
       <div class="aula-sub">Bloco E · Princípio do motor CC e controle de sentido de giro</div>
@@ -230,7 +298,7 @@ footer{border-top:1px solid var(--border);padding:28px 40px;
       <div class="aula-top"><span class="aula-num">A14</span><span class="aula-name">Servomotor e Comparativo de Atuadores</span></div>
       <div class="aula-sub">Bloco E (conclusão) · Controle angular com Servo.h e escolha do atuador ideal</div>
     </a></div>
-  <div class="block-label"><span class="block-badge">BLOCO F</span> Robótica e Projeto Integrado <span class="block-sub">· Aulas 15–20 · Base tecnológica 7 — novo, com estrutura de projeto adaptada da Semana 16 de AOC</span></div>
+  <div class="block-label"><span class="block-badge">BLOCO F</span> Robótica e Projeto Integrado <span class="block-sub">· Aulas 15–20</span></div>
   <div class="aula-grid"><a href="embarcados_aula15.html" class="aula-card" id="a15" style="--wk-color:#ff3b5c">
       <div class="aula-top"><span class="aula-num">A15</span><span class="aula-name">Fundamentos de Robótica e Locomoção Diferencial</span></div>
       <div class="aula-sub">Bloco F · Arquitetura de um robô móvel e montagem do chassi</div>
@@ -251,24 +319,56 @@ footer{border-top:1px solid var(--border);padding:28px 40px;
       <div class="aula-sub">Bloco F (entrega) · Checklist de validação e defesa técnica do projeto</div>
     </a></div>
 
-  <div class="section-label">🧭 Nota Metodológica da Curadoria</div>
-  <div class="ementa-box">
-    A disciplina <b>Arquitetura e Organização de Computadores</b> (Curso Superior ADS) usa Arduino/ESP32 como recurso didático para tornar conceitos de hardware verificáveis, mas não trabalha eletrônica analógica, motores ou robótica — sua ementa é de arquitetura de computadores, não de sistemas embarcados. Por isso, os conteúdos das Semanas 13–15 (hardware, programação básica, sensores) e a estrutura de projeto da Semana 16 foram <b>reaproveitados/adaptados</b> como espinha dorsal técnica (Aulas 05–10 e 17–20), enquanto os blocos de eletrônica analógica (Aulas 01–04), motores (Aulas 11–14) e robótica (Aulas 15–16) foram <b>criados do zero</b> para fechar as lacunas da ementa 935. O Lab 08 (Polling vs. Interrupção) e o uso de ESP32/FreeRTOS/osciloscópio do curso original <b>não</b> foram trazidos: não são exigidos pela ementa 935, cujas ferramentas previstas são apenas Arduino IDE, TinkerCad e Ardusim. As 40 horas-aula oficiais foram organizadas em <b>20 aulas de ~2 horas-aula cada</b>, ritmo comum de encontro semanal duplo nos cursos técnicos do Centro Paula Souza.
-  </div>
-
 </div>
 
 <footer>
   <div class="footer-left">
     <span class="footer-sig">DESENVOLVIMENTO DE SISTEMAS EMBARCADOS</span><br>
-    Plano de Curso 935 · Habilitação Profissional de Técnico em Informática<br>
-    Centro Paula Souza · FATEC/ETEC · 2026
+    Técnico em Informática · 40 horas-aula<br>
+    Centro Paula Souza · 2026
   </div>
   <div style="font-family:var(--mono);font-size:9px;color:var(--text3);text-align:right;">
     EMB-935 · ÍNDICE · 20 AULAS<br>
-    <span style="color:#00ff88">CURADORIA A PARTIR DE AOC/ADS</span>
+    <span style="color:#00ff88">GAMIFICADO</span>
   </div>
 </footer>
+
+
+<script>
+(function(){
+  function refresh(){
+    var badges = [];
+    try { badges = JSON.parse(localStorage.getItem("emb_badges") || "[]"); } catch(e){}
+    var total = parseInt(localStorage.getItem("emb_xp_total") || "0", 10);
+    var totalEl = document.getElementById("idxXpTotal");
+    var countEl = document.getElementById("idxBadgeCount");
+    if(totalEl) totalEl.textContent = total;
+    if(countEl) countEl.textContent = badges.length;
+    document.querySelectorAll(".badge-slot").forEach(function(el){
+      var slot = "aula" + el.getAttribute("data-slot");
+      if(badges.indexOf(slot) > -1){
+        el.textContent = "🏆";
+        el.style.borderColor = "var(--green)";
+        el.style.background = "rgba(0,255,136,.12)";
+        el.style.color = "var(--green)";
+      }
+    });
+  }
+  window.embIndexReset = function(){
+    if(!confirm("Isso vai zerar todo o XP e selos salvos neste navegador. Continuar?")) return;
+    localStorage.removeItem("emb_xp_total");
+    localStorage.removeItem("emb_badges");
+    for(var i=1;i<=20;i++){
+      var id = "aula" + String(i).padStart(2,"0");
+      localStorage.removeItem("emb_xp_" + id);
+      localStorage.removeItem("emb_answered_" + id);
+    }
+    location.reload();
+  };
+  refresh();
+})();
+</script>
+
 
 </body>
 </html>
