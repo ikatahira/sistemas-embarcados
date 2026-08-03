@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word na Prática — Aulas Práticas 1 e 2</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ink:#0e0e14;--paper:#f5f0e8;--cream:#faf7f2;
+  --gold:#c9882a;--gold-light:#f0c56a;--gold-pale:#fdf3dc;
+  --blue:#1d4ed8;--blue-light:#dbeafe;
+  --green:#15803d;--green-light:#dcfce7;
+  --red:#b91c1c;--red-light:#fee2e2;
+  --gray:#6b7280;--border:#e5ddd0;
+  --shadow:0 2px 12px rgba(14,14,20,.08);
+  --r:10px;
+  --word:#2b579a;--word-light:#e8f0fb;
+}
+body{font-family:'Syne',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;min-height:100vh}
+
+/* HEADER */
+.header{background:var(--ink);color:#fff;position:sticky;top:0;z-index:200;border-bottom:3px solid var(--gold)}
+.header-inner{max-width:1100px;margin:0 auto;padding:16px 28px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.week-pill{background:var(--gold);color:var(--ink);border-radius:50px;padding:5px 14px;font-size:.78em;font-weight:700;letter-spacing:.04em;white-space:nowrap}
+.header-title{flex:1}
+.header-title h1{font-size:clamp(1em,2.5vw,1.35em);font-weight:800;letter-spacing:-.02em}
+.header-title p{font-size:.82em;opacity:.6;margin-top:2px}
+.xp-bar-wrap{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:8px 16px}
+.xp-label{font-size:.78em;font-weight:700;color:var(--gold-light);white-space:nowrap}
+.xp-track{width:100px;height:6px;background:rgba(255,255,255,.15);border-radius:50px;overflow:hidden}
+.xp-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:50px;transition:width 1s cubic-bezier(.22,1,.36,1)}
+.xp-num{font-size:.78em;font-weight:700;color:var(--gold-light);font-family:'DM Mono',monospace}
+
+.container{max-width:1100px;margin:0 auto;padding:24px}
+
+/* AULA DIVIDER */
+.aula-divider{
+  background:var(--ink);color:#fff;border-radius:var(--r);padding:20px 28px;margin:36px 0 20px;
+  display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+}
+.aula-divider:first-child{margin-top:0}
+.aula-num{background:var(--gold);color:var(--ink);width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.2em;flex-shrink:0}
+.aula-info h2{font-size:1.15em;font-weight:800}
+.aula-info p{font-size:.85em;opacity:.7;margin-top:2px}
+.aula-goal{margin-left:auto;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:50px;padding:6px 16px;font-size:.8em;font-weight:600}
+
+/* EXERCÍCIO — sempre visível, foco em ação */
+.exercicio{background:#fff;border-radius:var(--r);padding:22px 24px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--border);border-left:5px solid var(--word)}
+.ex-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.ex-num{background:var(--word);color:#fff;width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9em;flex-shrink:0}
+.ex-title{font-size:1.02em;font-weight:800}
+.ex-xp{margin-left:auto;background:var(--gold-pale);color:var(--gold);border:1px solid #fcd975;border-radius:50px;padding:3px 12px;font-size:.78em;font-weight:700}
+.ex-goal{font-size:.86em;color:var(--gray);margin:4px 0 14px;padding-left:42px}
+
+.ex-steps{display:flex;flex-direction:column;gap:9px;padding-left:42px}
+.exs{display:flex;gap:10px;align-items:flex-start}
+.exs-bullet{width:20px;height:20px;border-radius:50%;border:2px solid var(--word);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:.65em;color:var(--word);font-weight:800}
+.exs-text{font-size:.9em;line-height:1.55}
+.exs-code{font-family:'DM Mono',monospace;background:var(--ink);color:var(--gold-light);padding:1px 7px;border-radius:4px;font-size:.88em}
+
+.ex-checkpoint{margin:14px 0 0 42px;background:var(--green-light);color:var(--green);border-radius:8px;padding:9px 14px;font-size:.85em;font-weight:600}
+.ex-warn{margin:10px 0 0 42px;background:#fef3c7;color:#92400e;border-radius:8px;padding:9px 14px;font-size:.85em}
+
+/* pequeno campo de digitação embutido no exercício */
+.ex-typing{margin:12px 0 0 42px;background:var(--cream);border:2px solid var(--border);border-radius:8px;padding:12px 14px;transition:border-color .3s;max-width:420px}
+.ex-typing.correct{border-color:var(--green);background:var(--green-light)}
+.ex-typing.wrong{animation:shake .4s;border-color:var(--red)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.ex-typing-label{font-size:.8em;color:var(--gray);margin-bottom:6px}
+.ex-typing input{width:100%;border:2px solid var(--border);border-radius:6px;padding:8px 10px;font-family:'DM Mono',monospace;font-size:.9em;outline:none}
+.ex-typing input:focus{border-color:var(--blue)}
+.ex-typing-fb{font-size:.8em;font-weight:600;margin-top:6px;min-height:16px}
+
+/* MOCKS (reaproveitados, compactos) */
+.word-mock{background:#fff;border-radius:8px;border:2px solid var(--word);overflow:hidden;max-width:440px;margin:12px 0 0 42px}
+.word-ribbon{background:var(--word);padding:5px 10px;display:flex;gap:6px;align-items:center}
+.word-rib-btn{background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:4px;padding:3px 9px;font-size:.72em;font-weight:700;font-family:'Syne',sans-serif}
+.word-rib-btn.active{background:rgba(255,255,255,.4)}
+.word-toolbar{background:var(--word-light);padding:6px 10px;display:flex;gap:5px;flex-wrap:wrap;border-bottom:1px solid #c8d8f0}
+.word-tool-btn{background:#fff;border:1px solid #c8d8f0;border-radius:4px;padding:3px 7px;font-size:.75em;font-family:'Syne',sans-serif;font-weight:600}
+.word-body{padding:14px;min-height:60px;font-size:.82em;font-family:'Times New Roman',serif;color:#333}
+
+.pgsetup-mock{background:#fff;border:2px solid var(--word);border-radius:8px;max-width:380px;margin:12px 0 0 42px;overflow:hidden}
+.pgsetup-title{background:var(--word);color:#fff;padding:6px 12px;font-size:.78em;font-weight:700}
+.pgsetup-body{padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pgsetup-field{font-size:.72em}
+.pgsetup-field label{display:block;color:var(--gray);margin-bottom:2px;font-weight:600}
+.pgsetup-field .val{background:var(--word-light);border:1px solid #c8d8f0;border-radius:5px;padding:4px 7px;font-family:'DM Mono',monospace;font-weight:700;color:var(--word)}
+
+.navpane-mock{background:#fff;border:2px solid var(--word);border-radius:8px;max-width:380px;margin:12px 0 0 42px;overflow:hidden}
+.navpane-head{background:var(--word);color:#fff;padding:6px 12px;font-size:.75em;font-weight:700}
+.navpane-body{padding:8px 4px}
+.navpane-item{padding:5px 12px;font-size:.8em;border-radius:5px}
+.navpane-item.h1{font-weight:800}
+.navpane-item.h2{font-weight:600;color:var(--gray);padding-left:26px;font-size:.76em}
+.navpane-item.active{background:var(--word-light);color:var(--word)}
+
+.ruler-mock{background:#fff;border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin:12px 0 0 42px;max-width:440px}
+.ruler-track{position:relative;height:22px;background:#f1f3f4;border-radius:4px;border:1px solid var(--border)}
+.tab-stop{position:absolute;top:-5px;font-size:.85em;color:var(--word)}
+.ruler-legend{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;font-size:.7em;color:var(--gray)}
+
+/* RESULTADO ESPERADO — prévia de tela do Word */
+.ex-result{margin:14px 0 0 42px}
+.ex-result-label{font-size:.78em;font-weight:700;color:var(--word);text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.doc-preview-wrap{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.doc-preview-item{display:flex;flex-direction:column;align-items:center}
+.doc-page{background:#fff;border:1px solid #ccc;box-shadow:0 3px 12px rgba(0,0,0,.12);width:170px;aspect-ratio:210/297;padding:10px;position:relative;font-family:'Times New Roman',serif;overflow:hidden;border-radius:2px}
+.doc-page.landscape{width:220px;aspect-ratio:297/210}
+.doc-page.small{width:110px}
+.doc-page-margin{position:absolute;inset:8px;border:1px dashed #a9bfe0;pointer-events:none}
+.doc-page-content{position:relative;z-index:2;font-size:.52em;line-height:1.5;color:#222}
+.doc-page-content .h1{font-size:1.55em;font-weight:800;color:#1c3a63;margin-bottom:3px}
+.doc-page-content .h2{font-size:1.15em;font-weight:700;color:#3a5a8c;margin:2px 0 2px 10px}
+.doc-page-content .h1.themed{color:#8a3ffc}
+.doc-page-content .h2.themed{color:#b48bf0}
+.doc-page-content .normal{font-size:1em;color:#333}
+.doc-page-content .price-row{display:flex;justify-content:space-between;font-size:1em;margin-bottom:3px;border-bottom:1px dotted #ccc}
+.doc-page-badge{position:absolute;top:4px;right:4px;background:var(--word);color:#fff;font-size:.55em;font-weight:700;padding:2px 6px;border-radius:20px;z-index:3;font-family:'Syne',sans-serif}
+.doc-page-badge.ok{background:var(--green)}
+.doc-preview-cap{font-size:.72em;color:var(--gray);text-align:center;margin-top:7px;max-width:170px}
+.split-preview{display:flex;gap:0;border:1px solid var(--border);border-radius:6px;overflow:hidden;box-shadow:0 3px 12px rgba(0,0,0,.1)}
+.split-nav{background:var(--word-light);width:110px;padding:8px 6px;font-family:'Syne',sans-serif}
+.split-nav-item{font-size:.62em;padding:4px 6px;border-radius:4px;margin-bottom:2px}
+.split-nav-item.h1{font-weight:800;color:#1c3a63}
+.split-nav-item.h2{font-weight:600;color:#5a6a85;padding-left:14px;font-size:.58em}
+.split-nav-item.active{background:#fff;color:var(--word)}
+.split-doc{background:#fff;width:170px;padding:12px 10px;font-family:'Times New Roman',serif}
+
+/* CHECKLIST FINAL DA AULA */
+.checklist-card{background:var(--ink);color:#fff;border-radius:var(--r);padding:22px 26px;margin-bottom:16px}
+.checklist-card h3{font-size:1em;font-weight:800;margin-bottom:12px}
+.check-row{display:flex;gap:10px;align-items:flex-start;padding:7px 0;font-size:.88em;opacity:.9}
+.check-row .cb{width:18px;height:18px;border:2px solid var(--gold-light);border-radius:4px;flex-shrink:0;margin-top:2px}
+
+/* MINI QUIZ DE REVISÃO */
+.mini-quiz{background:#fff;border-radius:var(--r);padding:20px 22px;margin-bottom:16px;border:1px solid var(--border)}
+.mini-quiz-title{font-weight:800;font-size:.95em;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.quiz-q{background:var(--cream);border-radius:8px;padding:14px 16px;border:1px solid var(--border);margin-bottom:10px}
+.quiz-question{font-weight:700;font-size:.88em;margin-bottom:10px}
+.quiz-options{display:flex;flex-direction:column;gap:6px}
+.quiz-option{padding:8px 12px;border:2px solid var(--border);border-radius:7px;cursor:pointer;font-size:.85em;background:#fff;text-align:left;font-family:'Syne',sans-serif;font-weight:600}
+.quiz-option:hover{border-color:var(--blue);background:var(--blue-light)}
+.quiz-option.correct{border-color:var(--green);background:var(--green-light);color:var(--green)}
+.quiz-option.wrong{border-color:var(--red);background:var(--red-light);color:var(--red)}
+.quiz-option:disabled{cursor:default}
+.quiz-feedback{font-size:.8em;font-weight:600;margin-top:8px;padding:6px 10px;border-radius:6px;display:none}
+.quiz-feedback.show{display:block}
+.quiz-feedback.ok{background:var(--green-light);color:var(--green)}
+.quiz-feedback.bad{background:var(--red-light);color:var(--red)}
+
+/* PROGRESS */
+.progress-bar{background:var(--paper);border-radius:var(--r);padding:18px;margin:24px 0;border:1px solid var(--border)}
+.progress-missions{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.prog-item{background:#fff;border:1px solid var(--border);border-radius:8px;padding:10px;display:flex;align-items:center;gap:8px;font-size:.85em}
+.total-xp{background:var(--ink);color:#fff;border-radius:var(--r);padding:14px 18px;display:flex;align-items:center;justify-content:space-between}
+.total-xp-num{font-size:1.3em;font-weight:800;color:var(--gold-light);font-family:'DM Mono',monospace}
+
+@media(max-width:640px){
+  .container{padding:14px}
+  .exercicio{padding:16px}
+  .ex-goal,.ex-steps,.ex-checkpoint,.ex-warn,.word-mock,.pgsetup-mock,.navpane-mock,.ruler-mock,.ex-typing{margin-left:0;padding-left:0}
+  .aula-goal{margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <span class="week-pill">📘 Word na Prática</span>
+    <div class="header-title">
+      <h1>2 Aulas 100% Práticas — Configuração e Estrutura de Documentos</h1>
+      <p>Cada exercício é feito ao vivo, no Word, junto com a turma</p>
+    </div>
+    <div class="xp-bar-wrap">
+      <span class="xp-label">⚡ XP</span>
+      <div class="xp-track"><div class="xp-fill" id="xpFill"></div></div>
+      <span class="xp-num" id="xpNum">0 / 300</span>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ============ AULA PRÁTICA 1 ============ -->
+  <div class="aula-divider">
+    <div class="aula-num">1</div>
+    <div class="aula-info">
+      <h2>Aula Prática 1 — Configuração do Documento</h2>
+      <p>Margens · orientação · tamanho do papel · quebras · tabulações</p>
+    </div>
+    <div class="aula-goal">🎯 Ao final: 1 documento configurado do zero</div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div class="ex-title">Criar o documento e abrir a Configuração de Página</div>
+      <div class="ex-xp">⚡ +15 XP</div>
+    </div>
+    <div class="ex-goal">Todo mundo abre um documento novo e chega até a mesma tela.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Abra o Word e pressione <span class="exs-code">Ctrl + N</span> para um documento em branco.</div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Clique na aba <strong>Layout</strong> na faixa de opções.</div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Clique em <strong>Margens → Margens Personalizadas</strong> para abrir a caixa de diálogo.</div></div>
+    </div>
+    <div class="word-mock">
+      <div class="word-ribbon">
+        <button class="word-rib-btn">Início</button>
+        <button class="word-rib-btn active">Layout</button>
+        <button class="word-rib-btn">Referências</button>
+      </div>
+      <div class="word-toolbar">
+        <button class="word-tool-btn">📏 Margens ▾</button>
+        <button class="word-tool-btn">🔄 Orientação ▾</button>
+        <button class="word-tool-btn">📄 Tamanho ▾</button>
+        <button class="word-tool-btn">⑀ Quebras ▾</button>
+      </div>
+      <div class="word-body" style="color:#888">Clique em "Margens Personalizadas" no fim do menu...</div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: a caixa "Configurar Página" está aberta na sua tela?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar</div>
+      <div class="doc-preview-wrap">
+        <div class="doc-preview-item">
+          <div class="doc-page">
+            <div class="doc-page-badge">antes</div>
+            <div class="doc-page-content"><span class="normal" style="color:#aaa">Documento em branco, sem nada configurado ainda...</span></div>
+          </div>
+          <div class="doc-preview-cap">Página em branco — a caixa de diálogo está aberta por cima, ainda não aplicada</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">2</div>
+      <div class="ex-title">Configurar margens no padrão ABNT</div>
+      <div class="ex-xp">⚡ +15 XP</div>
+    </div>
+    <div class="ex-goal">Digite exatamente estes valores nos campos da caixa de diálogo.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Superior: <span class="exs-code">2,5 cm</span> — Inferior: <span class="exs-code">2,5 cm</span></div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Esquerda: <span class="exs-code">3 cm</span> — Direita: <span class="exs-code">2 cm</span></div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Clique em <strong>OK</strong> para aplicar.</div></div>
+    </div>
+    <div class="pgsetup-mock">
+      <div class="pgsetup-title">Configurar Página</div>
+      <div class="pgsetup-body">
+        <div class="pgsetup-field"><label>Superior</label><div class="val">2,5 cm</div></div>
+        <div class="pgsetup-field"><label>Inferior</label><div class="val">2,5 cm</div></div>
+        <div class="pgsetup-field"><label>Esquerda</label><div class="val">3,0 cm</div></div>
+        <div class="pgsetup-field"><label>Direita</label><div class="val">2,0 cm</div></div>
+      </div>
+    </div>
+    <div class="ex-warn">⚠️ Essa é a margem exigida pela norma ABNT — decore esses 4 números, eles caem sempre.</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar</div>
+      <div class="doc-preview-wrap">
+        <div class="doc-preview-item">
+          <div class="doc-page">
+            <div class="doc-page-badge ok">depois</div>
+            <div class="doc-page-margin"></div>
+            <div class="doc-page-content" style="padding:14px"><span class="normal" style="color:#aaa">|</span></div>
+          </div>
+          <div class="doc-preview-cap">A linha tracejada (guia visual) mostra as margens: mais espaço à esquerda que à direita</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">3</div>
+      <div class="ex-title">Trocar orientação e tamanho do papel</div>
+      <div class="ex-xp">⚡ +10 XP</div>
+    </div>
+    <div class="ex-goal">Teste as duas orientações e volte para a configuração padrão.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Em <strong>Layout → Orientação</strong>, clique em <strong>Paisagem</strong>. Veja a página girar.</div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Volte para <strong>Retrato</strong> (padrão para textos).</div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Em <strong>Layout → Tamanho</strong>, confirme que está selecionado <strong>A4</strong>.</div></div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: sua página está em Retrato, A4, com as margens do exercício 2?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar (compare as duas)</div>
+      <div class="doc-preview-wrap">
+        <div class="doc-preview-item">
+          <div class="doc-page">
+            <div class="doc-page-badge ok">final</div>
+            <div class="doc-page-margin"></div>
+          </div>
+          <div class="doc-preview-cap">Retrato + A4 — é essa que deve estar na sua tela agora</div>
+        </div>
+        <div class="doc-preview-item">
+          <div class="doc-page landscape" style="opacity:.55">
+            <div class="doc-page-badge">testado</div>
+            <div class="doc-page-margin"></div>
+          </div>
+          <div class="doc-preview-cap">Paisagem — só usado para testar, você voltou pro Retrato</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">4</div>
+      <div class="ex-title">Digite o conteúdo e insira uma quebra de seção</div>
+      <div class="ex-xp">⚡ +15 XP</div>
+    </div>
+    <div class="ex-goal">Criar duas "partes" no mesmo documento com formatações independentes.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Digite a linha: <span class="exs-code">Parte 1 — Capa</span></div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Pressione Enter e digite: <span class="exs-code">Parte 2 — Desenvolvimento</span></div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Clique bem no início de "Parte 2". Vá em <strong>Layout → Quebras → Quebra de Seção (Próxima Página)</strong>.</div></div>
+      <div class="exs"><div class="exs-bullet">4</div><div class="exs-text">Agora mude a orientação SÓ da página 2 para <strong>Paisagem</strong> — repare que a página 1 continua em Retrato.</div></div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: você tem 2 páginas, com orientações diferentes entre elas?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar</div>
+      <div class="doc-preview-wrap">
+        <div class="doc-preview-item">
+          <div class="doc-page">
+            <div class="doc-page-badge ok">página 1</div>
+            <div class="doc-page-content"><span class="normal" style="font-weight:700">Parte 1 — Capa</span></div>
+          </div>
+          <div class="doc-preview-cap">Seção 1 — continua Retrato</div>
+        </div>
+        <div class="doc-preview-item">
+          <div class="doc-page landscape">
+            <div class="doc-page-badge ok">página 2</div>
+            <div class="doc-page-content"><span class="normal" style="font-weight:700">Parte 2 — Desenvolvimento</span></div>
+          </div>
+          <div class="doc-preview-cap">Seção 2 — Paisagem, independente da página 1</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">5</div>
+      <div class="ex-title">Montar uma lista de preços com tabulação decimal</div>
+      <div class="ex-xp">⚡ +15 XP</div>
+    </div>
+    <div class="ex-goal">Usar a régua para alinhar números pela vírgula, sem usar espaços.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Numa nova linha, clique na régua horizontal na posição aproximada de 8cm e escolha o marcador de <strong>tabulação decimal</strong> (clique nos cantos da régua até aparecer o símbolo certo).</div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Digite: <span class="exs-code">Caderno</span> → pressione <strong>Tab</strong> → digite <span class="exs-code">12,90</span></div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Pressione Enter, digite <span class="exs-code">Caneta</span> → <strong>Tab</strong> → <span class="exs-code">3,50</span></div></div>
+      <div class="exs"><div class="exs-bullet">4</div><div class="exs-text">Pressione Enter, digite <span class="exs-code">Mochila</span> → <strong>Tab</strong> → <span class="exs-code">129,00</span></div></div>
+    </div>
+    <div class="ruler-mock">
+      <div class="ruler-track">
+        <span class="tab-stop" style="left:55%">┴</span>
+      </div>
+      <div class="ruler-legend"><span>┴ Tabulação decimal — os números ficam alinhados pela vírgula</span></div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: as vírgulas dos 3 preços ficam exatamente na mesma coluna vertical?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar</div>
+      <div class="doc-preview-wrap">
+        <div class="doc-preview-item">
+          <div class="doc-page">
+            <div class="doc-page-badge ok">final</div>
+            <div class="doc-page-content">
+              <div class="price-row"><span>Caderno</span><span>12,90</span></div>
+              <div class="price-row"><span>Caneta</span><span>3,50</span></div>
+              <div class="price-row"><span>Mochila</span><span>129,00</span></div>
+            </div>
+          </div>
+          <div class="doc-preview-cap">As vírgulas ficam alinhadas verticalmente, mesmo com números de tamanhos diferentes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mini quiz de revisão Aula 1 -->
+  <div class="mini-quiz">
+    <div class="mini-quiz-title">🧠 Revisão rápida — Aula 1</div>
+    <div class="quiz-q" id="qq0">
+      <div class="quiz-question">1. Qual aba tem Margens, Orientação e Tamanho do papel?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answerQuiz(0,0,1)">A) Início</button>
+        <button class="quiz-option" onclick="answerQuiz(0,1,1)">B) Layout</button>
+        <button class="quiz-option" onclick="answerQuiz(0,2,1)">C) Inserir</button>
+      </div>
+      <div class="quiz-feedback" id="qf0"></div>
+    </div>
+    <div class="quiz-q" id="qq1">
+      <div class="quiz-question">2. O que a quebra de seção permite que a quebra de página não permite?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answerQuiz(1,0,0)">A) Formatação diferente (orientação, margens) entre as partes</button>
+        <button class="quiz-option" onclick="answerQuiz(1,1,0)">B) Apagar o texto anterior</button>
+        <button class="quiz-option" onclick="answerQuiz(1,2,0)">C) Nada, são iguais</button>
+      </div>
+      <div class="quiz-feedback" id="qf1"></div>
+    </div>
+    <div class="quiz-q" id="qq2">
+      <div class="quiz-question">3. Qual tabulação alinha números pela vírgula?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answerQuiz(2,0,2)">A) Esquerda</button>
+        <button class="quiz-option" onclick="answerQuiz(2,1,2)">B) Centralizada</button>
+        <button class="quiz-option" onclick="answerQuiz(2,2,2)">C) Decimal</button>
+      </div>
+      <div class="quiz-feedback" id="qf2"></div>
+    </div>
+  </div>
+
+  <div class="checklist-card">
+    <h3>📋 Você sai da Aula 1 sabendo fazer:</h3>
+    <div class="check-row"><div class="cb"></div>Configurar margens personalizadas (padrão ABNT)</div>
+    <div class="check-row"><div class="cb"></div>Trocar orientação e tamanho do papel</div>
+    <div class="check-row"><div class="cb"></div>Inserir quebra de página e quebra de seção, e explicar a diferença</div>
+    <div class="check-row"><div class="cb"></div>Criar uma tabulação decimal e alinhar uma lista de valores</div>
+  </div>
+
+  <!-- ============ AULA PRÁTICA 2 ============ -->
+  <div class="aula-divider">
+    <div class="aula-num">2</div>
+    <div class="aula-info">
+      <h2>Aula Prática 2 — Estilos, Temas e Navegação</h2>
+      <p>Título 1/2 · temas · Painel de Navegação · reorganização de seções</p>
+    </div>
+    <div class="aula-goal">🎯 Ao final: 1 documento estruturado e navegável</div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">1</div>
+      <div class="ex-title">Digitar o esqueleto do documento</div>
+      <div class="ex-xp">⚡ +10 XP</div>
+    </div>
+    <div class="ex-goal">Um documento novo com 3 seções e 1 subseção, ainda sem formatação.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Documento novo (<span class="exs-code">Ctrl + N</span>). Digite as linhas, uma por vez, apertando Enter entre elas:</div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text"><span class="exs-code">Tecnologia da Informação</span></div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text"><span class="exs-code">Hardware</span></div></div>
+      <div class="exs"><div class="exs-bullet">4</div><div class="exs-text"><span class="exs-code">Periféricos</span></div></div>
+      <div class="exs"><div class="exs-bullet">5</div><div class="exs-text"><span class="exs-code">Software</span></div></div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: 4 linhas digitadas, tudo com o mesmo tamanho de fonte (ainda sem estilo)?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar</div>
+      <div class="doc-preview-wrap">
+        <div class="doc-preview-item">
+          <div class="doc-page">
+            <div class="doc-page-badge">sem estilo</div>
+            <div class="doc-page-content">
+              <div class="normal">Tecnologia da Informação</div>
+              <div class="normal">Hardware</div>
+              <div class="normal">Periféricos</div>
+              <div class="normal">Software</div>
+            </div>
+          </div>
+          <div class="doc-preview-cap">Todas as linhas iguais, sem hierarquia visual — é assim que deve estar antes do próximo exercício</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">2</div>
+      <div class="ex-title">Aplicar estilos de título</div>
+      <div class="ex-xp">⚡ +20 XP</div>
+    </div>
+    <div class="ex-goal">Transformar as 4 linhas soltas numa hierarquia real.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Clique na linha <span class="exs-code">Tecnologia da Informação</span>. Na aba <strong>Início</strong>, clique em <strong>Título 1</strong>.</div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Clique em <span class="exs-code">Hardware</span> e aplique <strong>Título 1</strong> também.</div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Clique em <span class="exs-code">Periféricos</span> e aplique <strong>Título 2</strong> (é subseção de Hardware).</div></div>
+      <div class="exs"><div class="exs-bullet">4</div><div class="exs-text">Clique em <span class="exs-code">Software</span> e aplique <strong>Título 1</strong>.</div></div>
+    </div>
+    <div class="word-mock">
+      <div class="word-ribbon">
+        <button class="word-rib-btn active">Início</button>
+        <button class="word-rib-btn">Inserir</button>
+        <button class="word-rib-btn">Layout</button>
+      </div>
+      <div class="word-toolbar">
+        <button class="word-tool-btn">Normal</button>
+        <button class="word-tool-btn" style="font-weight:800">Título 1</button>
+        <button class="word-tool-btn" style="font-weight:700;font-size:.9em">Título 2</button>
+      </div>
+      <div class="word-body">Selecione a linha e clique no estilo acima...</div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: os 4 textos mudaram de tamanho/aparência automaticamente ao aplicar o estilo?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar</div>
+      <div class="doc-preview-wrap">
+        <div class="doc-preview-item">
+          <div class="doc-page">
+            <div class="doc-page-badge ok">com estilos</div>
+            <div class="doc-page-content">
+              <div class="h1">Tecnologia da Informação</div>
+              <div class="h1">Hardware</div>
+              <div class="h2">Periféricos</div>
+              <div class="h1">Software</div>
+            </div>
+          </div>
+          <div class="doc-preview-cap">Título 1 grande e em negrito; Título 2 menor e recuado — a hierarquia agora é visível</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Digitação embutida -->
+  <div class="ex-typing" id="type1">
+    <div class="ex-typing-label">✏️ Qual estilo você aplicou em "Periféricos"?</div>
+    <input type="text" placeholder="Digite aqui..." oninput="checkTyping(this,'Título 2','type1',10)">
+    <div class="ex-typing-fb" id="type1-fb"></div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">3</div>
+      <div class="ex-title">Trocar o Tema do documento</div>
+      <div class="ex-xp">⚡ +10 XP</div>
+    </div>
+    <div class="ex-goal">Mudar cores e fontes de todos os estilos de uma vez.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Clique na aba <strong>Design</strong>.</div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Passe o mouse sobre os temas da galeria e veja o documento mudar em tempo real.</div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Clique em um tema diferente do padrão para aplicá-lo.</div></div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: as cores e fontes dos títulos mudaram, sem você tocar em cada um manualmente?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar (compare antes/depois)</div>
+      <div class="doc-preview-wrap">
+        <div class="doc-preview-item">
+          <div class="doc-page small">
+            <div class="doc-page-badge">tema padrão</div>
+            <div class="doc-page-content">
+              <div class="h1">Tecnologia da Informação</div>
+              <div class="h1">Hardware</div>
+              <div class="h2">Periféricos</div>
+            </div>
+          </div>
+          <div class="doc-preview-cap">Antes</div>
+        </div>
+        <div class="doc-preview-item">
+          <div class="doc-page small">
+            <div class="doc-page-badge ok">tema novo</div>
+            <div class="doc-page-content">
+              <div class="h1 themed">Tecnologia da Informação</div>
+              <div class="h1 themed">Hardware</div>
+              <div class="h2 themed">Periféricos</div>
+            </div>
+          </div>
+          <div class="doc-preview-cap">Depois — mesma estrutura, cores e fontes diferentes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">4</div>
+      <div class="ex-title">Ativar o Painel de Navegação</div>
+      <div class="ex-xp">⚡ +15 XP</div>
+    </div>
+    <div class="ex-goal">Ver a árvore de títulos do documento e navegar clicando nela.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">Clique na aba <strong>Exibir</strong>.</div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Marque a caixa <strong>Painel de Navegação</strong>.</div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Clique em cada título do painel lateral e observe o cursor pulando no documento.</div></div>
+    </div>
+    <div class="navpane-mock">
+      <div class="navpane-head">🧭 Navegação</div>
+      <div class="navpane-body">
+        <div class="navpane-item h1 active">Tecnologia da Informação</div>
+        <div class="navpane-item h1">Hardware</div>
+        <div class="navpane-item h2">Periféricos</div>
+        <div class="navpane-item h1">Software</div>
+      </div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: os 4 títulos aparecem certinho na árvore, com "Periféricos" recuado?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar</div>
+      <div class="split-preview">
+        <div class="split-nav">
+          <div class="split-nav-item h1 active">Tecnologia da Informação</div>
+          <div class="split-nav-item h1">Hardware</div>
+          <div class="split-nav-item h2">Periféricos</div>
+          <div class="split-nav-item h1">Software</div>
+        </div>
+        <div class="split-doc">
+          <div class="doc-page-content">
+            <div class="h1">Tecnologia da Informação</div>
+            <div class="h1">Hardware</div>
+            <div class="h2">Periféricos</div>
+            <div class="h1">Software</div>
+          </div>
+        </div>
+      </div>
+      <div class="doc-preview-cap" style="margin-left:0">Painel à esquerda + documento à direita — clicar num item do painel pula pra aquele ponto do texto</div>
+    </div>
+  </div>
+
+  <div class="exercicio">
+    <div class="ex-head">
+      <div class="ex-num">5</div>
+      <div class="ex-title">Reorganizar seções arrastando no painel</div>
+      <div class="ex-xp">⚡ +20 XP</div>
+    </div>
+    <div class="ex-goal">Mover uma seção inteira sem cortar e colar manualmente.</div>
+    <div class="ex-steps">
+      <div class="exs"><div class="exs-bullet">1</div><div class="exs-text">No Painel de Navegação, clique e segure em <strong>Software</strong>.</div></div>
+      <div class="exs"><div class="exs-bullet">2</div><div class="exs-text">Arraste para cima, soltando antes de <strong>Hardware</strong>.</div></div>
+      <div class="exs"><div class="exs-bullet">3</div><div class="exs-text">Confira no corpo do documento: a seção "Software" (com seu texto) mudou de posição.</div></div>
+    </div>
+    <div class="ex-checkpoint">✅ Checkpoint: "Software" agora aparece antes de "Hardware", tanto no painel quanto no texto?</div>
+    <div class="ex-result">
+      <div class="ex-result-label">🖥️ Como deve ficar</div>
+      <div class="split-preview">
+        <div class="split-nav">
+          <div class="split-nav-item h1">Tecnologia da Informação</div>
+          <div class="split-nav-item h1 active">Software</div>
+          <div class="split-nav-item h1">Hardware</div>
+          <div class="split-nav-item h2">Periféricos</div>
+        </div>
+        <div class="split-doc">
+          <div class="doc-page-content">
+            <div class="h1">Tecnologia da Informação</div>
+            <div class="h1">Software</div>
+            <div class="h1">Hardware</div>
+            <div class="h2">Periféricos</div>
+          </div>
+        </div>
+      </div>
+      <div class="doc-preview-cap" style="margin-left:0">"Software" trocou de lugar com "Hardware" — repare que "Periféricos" continua junto de "Hardware", como subseção</div>
+    </div>
+  </div>
+
+  <!-- Digitação embutida 2 -->
+  <div class="ex-typing" id="type2">
+    <div class="ex-typing-label">✏️ Em qual aba você ativa o Painel de Navegação?</div>
+    <input type="text" placeholder="Digite aqui..." oninput="checkTyping(this,'Exibir','type2',10)">
+    <div class="ex-typing-fb" id="type2-fb"></div>
+  </div>
+
+  <!-- Mini quiz de revisão Aula 2 -->
+  <div class="mini-quiz">
+    <div class="mini-quiz-title">🧠 Revisão rápida — Aula 2</div>
+    <div class="quiz-q" id="qq3">
+      <div class="quiz-question">1. O que acontece se você MODIFICA o estilo "Título 1"?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answerQuiz(3,0,1)">A) Só o título selecionado muda</button>
+        <button class="quiz-option" onclick="answerQuiz(3,1,1)">B) Todos os textos com esse estilo mudam junto</button>
+        <button class="quiz-option" onclick="answerQuiz(3,2,1)">C) Nada muda</button>
+      </div>
+      <div class="quiz-feedback" id="qf3"></div>
+    </div>
+    <div class="quiz-q" id="qq4">
+      <div class="quiz-question">2. Por que o Painel de Navegação precisa de estilos de título aplicados?</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answerQuiz(4,0,0)">A) Porque ele lê os estilos para montar a árvore</button>
+        <button class="quiz-option" onclick="answerQuiz(4,1,0)">B) Porque precisa de internet</button>
+        <button class="quiz-option" onclick="answerQuiz(4,2,0)">C) Ele funciona sem estilo nenhum</button>
+      </div>
+      <div class="quiz-feedback" id="qf4"></div>
+    </div>
+  </div>
+
+  <div class="checklist-card">
+    <h3>📋 Você sai da Aula 2 sabendo fazer:</h3>
+    <div class="check-row"><div class="cb"></div>Aplicar Título 1 e Título 2 criando uma hierarquia correta</div>
+    <div class="check-row"><div class="cb"></div>Trocar o Tema do documento e explicar o que ele afeta</div>
+    <div class="check-row"><div class="cb"></div>Ativar o Painel de Navegação e navegar clicando nos títulos</div>
+    <div class="check-row"><div class="cb"></div>Reorganizar seções inteiras arrastando no Painel de Navegação</div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar">
+    <div style="font-size:.82em;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray);margin-bottom:10px">📊 Seu progresso nas 2 aulas</div>
+    <div class="progress-missions">
+      <div class="prog-item">✏️ Digitação: <span id="prog-type" style="margin-left:4px;font-weight:700">0/2</span></div>
+      <div class="prog-item">🧠 Revisão: <span id="prog-quiz" style="margin-left:4px;font-weight:700">0/5</span></div>
+      <div class="prog-item">🔧 Exercícios: 10 no total (Aula 1: 5 · Aula 2: 5)</div>
+    </div>
+    <div class="total-xp">
+      <div>⚡ XP Total Acumulado</div>
+      <div class="total-xp-num" id="totalXpDisp">0 / 300 XP</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let totalXP = 0;
+const MAX_XP = 300;
+const earned = {};
+
+function addXP(key, amount) {
+  if (earned[key]) return;
+  earned[key] = true;
+  totalXP = Math.min(totalXP + amount, MAX_XP);
+  const pct = (totalXP / MAX_XP) * 100;
+  document.getElementById('xpFill').style.width = pct + '%';
+  document.getElementById('xpNum').textContent = totalXP + ' / ' + MAX_XP;
+  document.getElementById('totalXpDisp').textContent = totalXP + ' / ' + MAX_XP + ' XP';
+}
+
+let typingDone = {};
+function checkTyping(input, target, boxId, xp) {
+  const box = document.getElementById(boxId);
+  const fb = document.getElementById(boxId + '-fb');
+  const val = input.value.trim();
+  if (val.toLowerCase() === target.toLowerCase()) {
+    box.classList.remove('wrong'); box.classList.add('correct');
+    input.disabled = true;
+    fb.textContent = '🎉 Correto! +' + xp + ' XP'; fb.style.color = 'var(--green)';
+    if (!typingDone[boxId]) {
+      typingDone[boxId] = true;
+      addXP('typing_' + boxId, xp);
+      document.getElementById('prog-type').textContent = Object.keys(typingDone).length + '/2';
+    }
+  } else if (val.length >= target.length) {
+    box.classList.add('wrong');
+    setTimeout(() => box.classList.remove('wrong'), 500);
+    fb.textContent = '❌ Tente novamente...'; fb.style.color = 'var(--red)';
+  } else {
+    fb.textContent=''; box.classList.remove('wrong','correct');
+  }
+}
+
+const quizExplain = [
+  'Correto! Margens, orientação e tamanho ficam na aba Layout.',
+  'Correto! Quebra de seção permite formatação independente entre as partes.',
+  'Correto! A tabulação decimal alinha pela vírgula/ponto.',
+  'Correto! Modificar o estilo atualiza tudo que usa aquele estilo, automaticamente.',
+  'Correto! O painel lê os estilos de título para montar a árvore de navegação.'
+];
+let quizAnswered = {};
+function answerQuiz(qNum, choice, correct) {
+  if (quizAnswered[qNum]) return;
+  quizAnswered[qNum] = true;
+  const btns = document.querySelectorAll(`#qq${qNum} .quiz-option`);
+  btns.forEach(b => b.disabled = true);
+  const fb = document.getElementById('qf' + qNum);
+  if (choice === correct) {
+    btns[choice].classList.add('correct');
+    fb.textContent = '✅ ' + quizExplain[qNum]; fb.classList.add('show','ok');
+    addXP('quiz_' + qNum, 15);
+  } else {
+    btns[choice].classList.add('wrong');
+    btns[correct].classList.add('correct');
+    fb.textContent = '❌ ' + quizExplain[qNum]; fb.classList.add('show','bad');
+  }
+  document.getElementById('prog-quiz').textContent = Object.keys(quizAnswered).length + '/5';
+}
+</script>
+</body>
+</html>
